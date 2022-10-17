@@ -28,3 +28,7 @@ body{
     vertical-align: middle;
     margin-left: 10px;
 }
+
+.nav-item{
+    margin-bottom: 15px;
+}
