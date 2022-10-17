@@ -6,9 +6,25 @@ body{
 .container-fluid{
     height: 100%;
     width: 100%;
+    background-color: #181921;
 }
 
 .bg-menu{
-    background-color: black;
+    background-color: #252831;
     height: 765px;
+    padding-top: 45px;
+    padding-left: 25px;
+}
+
+.logo img{
+    width: 15%;
+}
+
+.logo h4{
+    color:#9da5b9;
+    font-size: 17px;
+    text-align: center;
+    display: inline;
+    vertical-align: middle;
+    margin-left: 10px;
 }
