@@ -1,8 +1,8 @@
-# sales-analysis
+# SalesAnalysis
 
 ## Principe :
 
-- Analyser une base de données et afficher les performances de vente en fonction du temps
+- Analyser une base de données client et afficher les performances de vente en fonction du temps/lieux/type de clientele (Possedant compte client ou non)
 
 ## Langages utilisés :
 
