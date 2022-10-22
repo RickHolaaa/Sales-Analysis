@@ -29,14 +29,13 @@ body{
 #inscription{
     text-align: center;
     background-color: #181921;
-    width: 50%;
+    width: 500px;
     padding-top: 50px;
     padding-bottom: 50px;
     border-radius: 5%;
     margin: auto;
     text-transform: uppercase;
     font-weight: bold;
-
 }
 
 #inscription input{
