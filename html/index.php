@@ -111,7 +111,7 @@ include("auth_session.php");
                             <!--Profile-->
                                 <div class="icons">
                                     <img class="" src="../img/notif.png" style="width: 15%;">
-                                    <a href="./signup.html">
+                                    <a href="./settings.html">
                                         <img src="../img/memoji-iphone-ios-13-modified.png" style="width: 10%;"">
                                     </a>
                                     <a href="logout.php">

@@ -43,7 +43,7 @@
                 <h2>Sign in</h2>
                 <div class="inputBox">
                     <input type="text" required="required" name="username">
-                    <span>Userame</span>
+                    <span>Username</span>
                     <i></i>
                 </div>
                 <div class="inputBox">
