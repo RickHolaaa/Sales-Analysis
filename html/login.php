@@ -24,7 +24,7 @@
         $username = mysqli_real_escape_string($mysqli, $username);
         $password = stripslashes($_REQUEST['password']);
         $password = mysqli_real_escape_string($mysqli, $password);
-            $query = "SELECT * FROM `users` WHERE username='$username' and password='".hash('sha256', $password)."'";
+        $query = "SELECT * FROM `vendeur` WHERE username='$username' and password='$password'";
         $result = mysqli_query($mysqli,$query) or die(mysql_error());
         $rows = mysqli_num_rows($result);
         if($rows==1){
@@ -32,13 +32,14 @@
             header("Location: index.php");
         }else{
             $message = "Le nom d'utilisateur ou le mot de passe est incorrect.";
+            echo $message;
         }
         }
         ?>
         <img src="../img/logo2.png" style="width:7%">
         <h7>SALESANALYSIS</h7>
         <div class="box">
-            <form autocomplete="off" action="" method="post" name="login">
+            <form autocomplete="off" method="post" name="login">
                 <h2>Sign in</h2>
                 <div class="inputBox">
                     <input type="text" required="required" name="username">
@@ -52,7 +53,7 @@
                 </div>
                 <div class="links">
                     <a href="#">Forgot Password ?</a>
-                    <a href="#">Signup</a>
+                    <a href="./signup.html">Signup</a>
                 </div>
                 <input type="submit" name="submit">
             </form>

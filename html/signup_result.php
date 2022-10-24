@@ -28,7 +28,7 @@
                 echo "Une erreur s'est produite: ".mysqli_error($mysqli);//je conseille de ne pas afficher les erreurs aux visiteurs mais de l'enregistrer dans un fichier log
             } else {
                 echo "</br>Vous êtes inscrit avec succès!</br>";
-                echo "</br><a href='login.html'>Veuillez vous reconnecter</a>";
+                echo "</br><a href='login.php'>Veuillez vous reconnecter</a>";
             }
         }
     }

@@ -1,3 +1,8 @@
+<?php
+//include auth_session.php file on all user panel pages
+include("auth_session.php");
+?>
+
 <!DOCTYPE html>
 <html lang="fr">
     <head>
@@ -99,6 +104,8 @@
                             <!--Dashboard-->
                             <div class="col-md-4 pt-5 pb-5"> 
                                 <h2>Dashboard</h2>
+                                <p>Hey, <?php echo $_SESSION['username']; ?>!</p>
+                                <p>You are now user dashboard page.</p>
                             </div>
                             <div class="col-md- pt-5 pb-5">
                             <!--SearchBar-->
@@ -115,6 +122,9 @@
                                     <img class="" src="../img/notif.png" style="width: 15%;">
                                     <a href="./signup.html">
                                         <img src="../img/memoji-iphone-ios-13-modified.png" style="width: 10%;"">
+                                    </a>
+                                    <a href="logout.php">
+                                        <img class="" src="../img/logout.png" style="width: 10%;">
                                     </a>
                                 </div>
                             </div>
