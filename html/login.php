@@ -53,9 +53,9 @@
                 </div>
                 <div class="links">
                     <a href="#">Forgot Password ?</a>
-                    <a href="./signup.html">Signup</a>
+                    <a href="./signup.html">Sign up</a>
                 </div>
-                <input type="submit" name="submit">
+                <input type="submit" name="submit" value="Sign in">
             </form>
         </div>
     </body>
