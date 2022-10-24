@@ -24,7 +24,7 @@
         $username = mysqli_real_escape_string($mysqli, $username);
         $password = stripslashes($_REQUEST['password']);
         $password = mysqli_real_escape_string($mysqli, $password);
-            $query = "SELECT * FROM `users` WHERE username='$username' and password='".hash('sha256', $password)."'";
+        $query = "SELECT * FROM `users` WHERE username='$username' and password='$password'";
         $result = mysqli_query($mysqli,$query) or die(mysql_error());
         $rows = mysqli_num_rows($result);
         if($rows==1){
