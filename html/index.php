@@ -1,8 +1,8 @@
 <?php
 //include auth_session.php file on all user panel pages
 include("auth_session.php");
-?>
 
+?>
 <!DOCTYPE html>
 <html lang="fr">
     <head>
@@ -13,7 +13,9 @@ include("auth_session.php");
         <!-- CSS -->
         <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" />
         <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.2.0/css/all.css" />
-        <link rel="stylesheet" href="../css/style.css"/>
+        <?php
+            echo "<link rel='stylesheet' href='../css/style.css'/>";
+        ?>
         <link rel="shortcut icon" href="../img/free-bar-chart-icon-676-thumb.png">
         <!-- JavaScripts -->
         <script src="https://code.jquery.com/jquery-3.4.1.slim.min.js"></script>
@@ -49,7 +51,7 @@ include("auth_session.php");
                     <div class="menu">
                         <ul class="nav flex-column mb-0">
                             <li class="nav-item">
-                                <a href="./index.html" class="nav-link section">
+                                <a href="./index.php" class="nav-link section">
                                     <i class="fa fa-th-large mr-3 fa-fw"></i>
                                     Dashboard
                                 </a>
@@ -69,7 +71,7 @@ include("auth_session.php");
                             <li class="nav-item">
                               <a href="#" class="nav-link section">
                                 <i class='fa fa-envelope mr-3 fa-fw'></i>
-                                        Messages
+                                        Notifications
                                     </a>
                             </li>
                             <li class="nav-item">
@@ -110,12 +112,14 @@ include("auth_session.php");
                             <div class="col-md-4 pt-5 profile pr-5 pb-5">
                             <!--Profile-->
                                 <div class="icons">
-                                    <img class="" src="../img/notif.png" style="width: 15%;">
-                                    <a href="./settings.html">
+                                    <a href="./messages.html">
+                                    <img class="" src="../img/ring.png" style="width: 12%;">
+                                    </a>
+                                    <a href="./signup.html">
                                         <img src="../img/memoji-iphone-ios-13-modified.png" style="width: 10%;"">
                                     </a>
                                     <a href="logout.php">
-                                        <img class="" src="../img/logout.png" style="width: 10%;">
+                                        <img class="" src="../img/lgout.png" style="width: 12%;">
                                     </a>
                                 </div>
                             </div>
@@ -189,15 +193,18 @@ include("auth_session.php");
                                     </div>
                                     <!--3Memsojis-->
                                     <div class="col-md-6">
-                                        <div class="row">
-                                            <div class="col-md-3">
+                                        <div class="row memojis">
+                                            <div class="col-md-3 memoji">
                                                 <img style="width: 100%;" src="../img/memoji1.png">
+                                                <h5>JEAN Pierre</h5>
                                             </div>
-                                            <div class="col-md-3">
-                                                <img style="width: 100%;" src="../img/memoji1.png">
+                                            <div class="col-md-3 memoji">
+                                                <img style="width: 100%;" src="../img/memoji2.png">
+                                                <h5>SAAD Maria</h5>
                                             </div>
-                                            <div class="col-md-3">
-                                                <img style="width: 100%;" src="../img/memoji1.png">
+                                            <div class="col-md-3 memoji">
+                                                <img style="width: 100%;" src="../img/memoji3.png">
+                                                <h5>DIAKITE Tiemokodjan</h5>
                                             </div>
                                         </div>
                                     </div>

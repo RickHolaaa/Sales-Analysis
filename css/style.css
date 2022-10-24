@@ -152,3 +152,20 @@ body{
     height: 260px;
     width: 500px;
 }
+
+.memojis{
+    display: flex;
+    justify-content: space-between;
+}
+
+.memoji{
+    text-align: center;
+    background-color: #242732;
+    padding: 30px;
+    border-radius: 20%;
+}
+
+.memoji h5{
+    text-align: center;
+    margin-right: 20px;
+}
