@@ -9,7 +9,7 @@
         <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" />
         <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.2.0/css/all.css" />
         <link rel="stylesheet" href="../css/style_signup.css">
-        <link rel="shortcut icon" href="../img/Logo.png">
+        <link rel="shortcut icon" hrsef="../img/Logo.png">
         <!-- JavaScripts -->
         <script src="https://code.jquery.com/jquery-3.4.1.slim.min.js"></script>
         <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js"></script>
@@ -21,11 +21,11 @@
         session_start();
         if (isset($_POST['username'])){
         $username = stripslashes($_REQUEST['username']);
-        $username = mysqli_real_escape_string($conn, $username);
+        $username = mysqli_real_escape_string($mysqli, $username);
         $password = stripslashes($_REQUEST['password']);
-        $password = mysqli_real_escape_string($conn, $password);
+        $password = mysqli_real_escape_string($mysqli, $password);
             $query = "SELECT * FROM `users` WHERE username='$username' and password='".hash('sha256', $password)."'";
-        $result = mysqli_query($conn,$query) or die(mysql_error());
+        $result = mysqli_query($mysqli,$query) or die(mysql_error());
         $rows = mysqli_num_rows($result);
         if($rows==1){
             $_SESSION['username'] = $username;
