@@ -6,10 +6,10 @@ define('DB_PASSWORD', 'root');
 define('DB_NAME', 'vente');
  
 // Connexion à la base de données MySQL 
-$conn = mysqli_connect(DB_SERVER, DB_USERNAME, DB_PASSWORD, DB_NAME);
+$mysqli = mysqli_connect(DB_SERVER, DB_USERNAME, DB_PASSWORD, DB_NAME);
  
 // Vérifier la connexion
-if($conn === false){
+if($mysqli === false){
     die("ERREUR : Impossible de se connecter. " . mysqli_connect_error());
 }
 ?>
