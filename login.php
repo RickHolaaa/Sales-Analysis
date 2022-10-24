@@ -16,18 +16,37 @@
         <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js"></script>
     </head>
     <body class="gradient-background">
+        <?php
+        require('config.php');
+        session_start();
+        if (isset($_POST['username'])){
+        $username = stripslashes($_REQUEST['username']);
+        $username = mysqli_real_escape_string($conn, $username);
+        $password = stripslashes($_REQUEST['password']);
+        $password = mysqli_real_escape_string($conn, $password);
+            $query = "SELECT * FROM `users` WHERE username='$username' and password='".hash('sha256', $password)."'";
+        $result = mysqli_query($conn,$query) or die(mysql_error());
+        $rows = mysqli_num_rows($result);
+        if($rows==1){
+            $_SESSION['username'] = $username;
+            header("Location: index.php");
+        }else{
+            $message = "Le nom d'utilisateur ou le mot de passe est incorrect.";
+        }
+        }
+        ?>
         <img src="../img/logo2.png" style="width:7%">
         <h7>SALESANALYSIS</h7>
         <div class="box">
-            <form autocomplete="off">
+            <form autocomplete="off" action="" method="post" name="login">
                 <h2>Sign in</h2>
                 <div class="inputBox">
-                    <input type="text" required="required">
+                    <input type="text" required="required" name="username">
                     <span>Userame</span>
                     <i></i>
                 </div>
                 <div class="inputBox">
-                    <input type="password" required="required">
+                    <input type="password" required="required" name="password">
                     <span>Password</span>
                     <i></i>
                 </div>
@@ -35,7 +54,7 @@
                     <a href="#">Forgot Password ?</a>
                     <a href="#">Signup</a>
                 </div>
-                <input type="submit" value="Login">
+                <input type="submit" name="submit">
             </form>
         </div>
     </body>
