@@ -1,5 +1,4 @@
 <?php 
-    session_start();
 //------ PHP code for User registration form---
     //par défaut, on affiche le formulaire (quand il validera le formulaire sans erreur avec l'inscription validée, on l'affichera plus)
     //traitement du formulaire:

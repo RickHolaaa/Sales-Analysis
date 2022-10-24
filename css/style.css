@@ -69,6 +69,7 @@ body{
 .calendar{
     background-color: #242732;
     border-radius: 20px;
+    width: 100%;
 }
 
 .total-customer{
@@ -91,4 +92,63 @@ body{
 .total{
     display: flex;
     justify-content: space-between;
+    text-align: center;
+}
+
+.date-select{
+    width: 100%;
+    display: flex;
+    text-align: center;
+    justify-content: space-between;
+    margin-right: 30px;
+    margin-left: 20px;
+}
+
+.date-select p{
+    display: inline;
+    vertical-align: middle;
+}
+
+.jour{
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    margin-left: 30px;
+    margin-right: 50px;
+}
+
+.jour-num{
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    margin-left: 20px;
+    margin-right: 40px;
+    vertical-align: middle;
+    margin-bottom: 5px;
+}
+
+.jour-num .day{
+    background-color: #181921;
+    width: 40px;
+    height: 40px;
+    text-align: center;
+    padding-bottom: 20px;
+    border-radius: 50%;
+    padding-top: 7px;
+}
+
+.actual-day{
+    background-color: #60C8FB;
+    width: 40px;
+    height: 40px;
+    text-align: center;
+    padding-bottom: 20px;
+    border-radius: 50%;
+    padding-top: 7px;
+    color: #181921;
+}
+
+#map{
+    height: 260px;
+    width: 500px;
 }
