@@ -17,9 +17,9 @@
             echo "Le champ Mot de passe est vide.";
         } elseif($_POST['password']!=$_POST['verif']){
             echo "Les 2 mots de passe ne sont pas égaux.";
-        } elseif(mysqli_num_rows(mysqli_query($conn,"SELECT * FROM vendeur WHERE username='".$_POST['username']."'"))==1){//on vérifie que ce pseudo n'est pas déjà utilisé par un autre membre
+        } elseif(mysqli_num_rows(mysqli_query($mysqli,"SELECT * FROM vendeur WHERE username='".$_POST['username']."'"))==1){//on vérifie que ce pseudo n'est pas déjà utilisé par un autre membre
             echo "Cet username est déjà utilisé.";
-        } elseif(mysqli_num_rows(mysqli_query($conn,"SELECT * FROM vendeur WHERE email='".$_POST['email']."'"))==1){
+        } elseif(mysqli_num_rows(mysqli_query($mysqli,"SELECT * FROM vendeur WHERE email='".$_POST['email']."'"))==1){
             echo "Ce mail est déjà utilisé.";
         } else {
             //toutes les vérifications sont faites, on passe à l'enregistrement dans la base de données:
