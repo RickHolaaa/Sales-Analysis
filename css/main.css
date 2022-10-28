@@ -1,0 +1,7 @@
+.back-video{
+    display: block;
+    width: 1349px;
+    margin:auto;
+    z-index: -1;
+    position:absolute;
+}

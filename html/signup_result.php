@@ -4,7 +4,7 @@
     //traitement du formulaire:
     include "config.php";
 
-    echo "username : ".$_POST['username'].", password : ".$_POST['password'].", verif password : ".$_POST['verif'].", email : ".$_POST['email']."</br></br>";
+    //echo "username : ".$_POST['username'].", password : ".$_POST['password'].", verif password : ".$_POST['verif'].", email : ".$_POST['email']."</br></br>";
     if(isset($_POST['username'],$_POST['password'])){//l'utilisateur à cliqué sur "S'inscrire", on demande donc si les champs sont défini avec "isset"
         if(empty($_POST['username'])){//le champ pseudo est vide, on arrête l'exécution du script et on affiche un message d'erreur
             echo "Le champ username est vide.";
@@ -27,8 +27,9 @@
                 echo "Une erreur s'est produite: ".mysqli_error($mysqli);//je conseille de ne pas afficher les erreurs aux visiteurs mais de l'enregistrer dans un fichier log
             } else {
                 echo "</br>Vous êtes inscrit avec succès!</br>";
-                echo "</br><a href='login.php'>Veuillez vous reconnecter</a>";
+                echo "</br><a href='login.php'>Veuillez vous connecter</a>";
             }
         }
     }
 ?>
+
