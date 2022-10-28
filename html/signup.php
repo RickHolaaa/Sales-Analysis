@@ -42,6 +42,10 @@
                     } else {
                         echo "</br>Vous êtes inscrit avec succès!</br>";
                         echo "</br><a href='login.php'>Veuillez vous reconnecter</a>";
+                        $_SESSION['email'] = $_POST['email'];
+                        $email = $_SESSION['email'];
+                        $_SESSION['id'] = $mysqli->insert_id;
+                        $id = $_SESSION['id'];
                     }
                 }
             }

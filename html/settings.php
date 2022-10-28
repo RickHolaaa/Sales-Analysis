@@ -41,13 +41,24 @@ include("auth_session.php");
         <div class="container-fluid text-light">
             <?php
               require('config.php');
-
-              if($_GET["ref"] == "deleted" ){
-                $mysqli->query("DELETE FROM vendeur WHERE id='" . $_SESSION["username"] . "'");
-                header("login.php");
-                echo "Compte supprimé avec succès.";
-                exit();
-              }
+                if (isset($_POST['deleted'])){
+                  $user_id = $_SESSION['id'];
+                  $query = "DELETE FROM vendeur WHERE id='" . $user_id . "'";
+                  $launch_query = $mysqli->query($query);
+                  echo "ALOOO";
+                  if($launch_query){
+                    echo "OK";
+                    $_SESSION['message']="Compte supprimé avec succès.";
+                    header("Location: login.php");
+                    exit(0);
+                  }
+                  else{
+                    echo "NON";
+                    $_SESSION["message"]="Problème...";
+                    header("Location : settings.php");
+                    exit(0);
+                  }
+                }
             ?>
             <div class="row">
                 <div class="col-md-2 bg-menu">
@@ -172,11 +183,17 @@ include("auth_session.php");
                                   <form>
                                     <div class="form-group">
                                         <label for="fullName">Full Name</label>
-                                        <input type="text" class="form-control" id="fullName" aria-describedby="fullNameHelp" placeholder="Enter your fullname" value="JEAN Pierre">
-                                    </div>
+                                        <?php
+                                          $usr = $_SESSION['username'];
+                                          echo "<input type='text' class='form-control' id='fullName' aria-describedby='fullNameHelp' placeholder='Enter your fullname' value='$usr'>";
+                                        ?>
+                                      </div>
                                     <div class="form-group">
                                         <label for="email">Email</label>
-                                        <input type="text" class="form-control" id="email" aria-describedby="fullNameHelp" placeholder="Enter your email" value="jean-pierre@gmail.com">
+                                        <?php
+                                          $mail = $_SESSION['email'];
+                                          echo "<input type='text' class='form-control' id='email' aria-describedby='fullNameHelp' placeholder='Enter your email' value='$mail'>";
+                                        ?>
                                     </div>
                                     <br>
                                     <button type="button" class="btn btn-primary">Update Profile</button>
@@ -186,12 +203,12 @@ include("auth_session.php");
                                 <div class="tab-pane" id="account">
                                   <h6>ACCOUNT SETTINGS</h6>
                                   <hr>
-                                  <form>
+                                  <form method="post">
                                     <div class="form-group">
                                       <label class="d-block text-danger">Delete Account</label>
                                       <p class="text-muted font-size-sm">Once you delete your account, there is no going back. Please be certain.</p>
                                     </div>
-                                    <a class="btn btn-danger" type="button" value="deleted" href="settings.php?ref=deleted">Delete Account</a>
+                                    <button class="btn btn-danger" name="deleted" type="submit" value="deleted" id="deleted">Delete Account</button>
                                   </form>
                                 </div>
                                 <div class="tab-pane" id="security">
