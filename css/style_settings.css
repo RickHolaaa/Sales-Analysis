@@ -69,3 +69,7 @@ body{
 .menu-settings a{
     margin-right: 10px;
 }
+
+.card{
+    background-color: #252831;
+}

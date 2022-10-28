@@ -81,7 +81,7 @@ include("auth_session.php");
                                       </a>
                             </li>
                             <li class="nav-item">
-                                <a href="./settings.html" class="nav-link section">
+                                <a href="./settings.php" class="nav-link section">
                                     <i class='fa fa-user-circle mr-3 fa-fw'></i>
                                         Settings
                                       </a>
