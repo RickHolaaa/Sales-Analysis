@@ -79,6 +79,60 @@ include("auth_session.php");
                     echo "<p style='text-align:center;'>Mot de passe modifié avec succès</p>";
                   }
                 }
+
+                if (isset($_POST['updated'])){
+                  $get_usr = $_POST['settings_usr'];
+                  $get_email = $_POST['settings_email'];
+                  if(empty($_POST['settings_usr'])){//le champ pseudo est vide, on arrête l'exécution du script et on affiche un message d'erreur
+                    echo "Le champ username est vide.";
+                  } elseif(!preg_match("#^[a-z0-9A-Z]+$#",$_POST['settings_usr'])){//le champ pseudo est renseigné mais ne convient pas au format qu'on souhaite qu'il soit, soit: que des lettres minuscule + des chiffres (je préfère personnellement enregistrer le pseudo de mes membres en minuscule afin de ne pas avoir deux pseudo identique mais différents comme par exemple: Admin et admin)
+                      echo "L'username doit être renseigné en lettres minuscules sans accents, sans caractères spéciaux.";
+                  } elseif(strlen($_POST['settings_usr'])>25){//le pseudo est trop long, il dépasse 25 caractères
+                      echo "L'username est trop long, il dépasse 25 caractères.";
+                  } else { // Cas possible
+                    $sql = "SELECT * FROM vendeur WHERE id = '".$_SESSION['id']."'";
+                    $query = $mysqli->query($sql);
+                    $row = $query->fetch_assoc();
+                    $phpusr = $row['username'];
+                    $phpemail = $row['email'];
+                    
+                    if(($phpusr==$get_usr)&&($phpemail==$get_email)){ // Si on valide sans rien modifier
+                      echo "<p style='text-align:center;'>Vous n'avez rien modifié</p>";
+                    } else if(($phpusr!=$get_usr)&&($phpemail==$get_email)){ // Si on valide en modifiant que l'username
+                      if(mysqli_num_rows(mysqli_query($mysqli,"SELECT * FROM vendeur WHERE username='".$_POST['settings_usr']."'"))==1){  // Si 
+                        echo "Cet username est déjà utilisé.";
+                      } else {
+                        echo "<p style='text-align:center;'>Username modifié avec succès</p>";
+                        $sql = "UPDATE vendeur SET username = '".$get_usr."' WHERE id ='".$_SESSION['id']."'";
+                        $query = $mysqli->query($sql);
+                        $_SESSION['username']=$get_usr;
+                      }
+                    } else if(($phpusr==$get_usr)&&($phpemail!=$get_email)){ // Si on valide en modifiant que l'email
+                      if (mysqli_num_rows(mysqli_query($mysqli,"SELECT * FROM vendeur WHERE email='".$_POST['settings_email']."'"))==1){//on vérifie que ce pseudo n'est pas déjà utilisé par un autre membre
+                        echo "Cet email est déjà utilisé.";
+                      } else {
+                        echo "<p style='text-align:center;'>Email modifié avec succès</p>";
+                        $sql = "UPDATE vendeur SET email = '".$get_email."' WHERE id ='".$_SESSION['id']."'";
+                        $query = $mysqli->query($sql);
+                        $_SESSION['email']=$get_email;
+                      }
+                    } else if(($phpusr!=$get_usr)&&($phpemail!=$get_email)){ // Si on valide en modifiant l'username et l'email
+                      if ((mysqli_num_rows(mysqli_query($mysqli,"SELECT * FROM vendeur WHERE email='".$_POST['settings_email']."'"))==1)&&(mysqli_num_rows(mysqli_query($mysqli,"SELECT * FROM vendeur WHERE username='".$_POST['settings_usr']."'"))==1)){
+                        echo "Cet username et ce mail sont déjà utilisés";
+                      } else {
+                        echo "<p style='text-align:center;'>Username et email modifiés avec succès</p>";
+                        $sql = "UPDATE vendeur SET username = '".$get_usr."' WHERE id ='".$_SESSION['id']."'";
+                        $query = $mysqli->query($sql);
+                        $sql = "UPDATE vendeur SET email = '".$get_email."' WHERE id ='".$_SESSION['id']."'";
+                        $query = $mysqli->query($sql);
+                        $_SESSION['username']=$get_usr;
+                        $_SESSION['email']=$get_email;
+                      }
+                    } else{
+                      echo "ERREUR";
+                    }
+                  }
+                }
             ?>
             <div class="row">
                 <div class="col-md-2 bg-menu">
@@ -120,7 +174,7 @@ include("auth_session.php");
                                       </a>
                             </li>
                             <li class="nav-item">
-                                <a href="./settings.html" class="nav-link section">
+                                <a href="./settings.php" class="nav-link section">
                                     <i class='fa fa-user-circle mr-3 fa-fw'></i>
                                         Settings
                                       </a>
@@ -200,24 +254,24 @@ include("auth_session.php");
                                 <div class="tab-pane active" id="profile">
                                   <h6>YOUR PROFILE INFORMATION</h6>
                                   <hr>
-                                  <form>
+                                  <form method="post">
                                     <div class="form-group">
                                         <label for="fullName">Username</label>
                                         <?php
                                           $usr = $_SESSION['username'];
-                                          echo "<input type='text' class='form-control' id='fullName' aria-describedby='fullNameHelp' placeholder='Enter your fullname' value='$usr'>";
+                                          echo "<input type='text' class='form-control' id='fullName' aria-describedby='fullNameHelp' placeholder='Enter your fullname' value='$usr' name='settings_usr'>";
                                         ?>
                                       </div>
                                     <div class="form-group">
                                         <label for="email">Email</label>
                                         <?php
                                           $mail = $_SESSION['email'];
-                                          echo "<input type='text' class='form-control' id='email' aria-describedby='fullNameHelp' placeholder='Enter your email' value='$mail'>";
+                                          echo "<input type='text' class='form-control' id='email' aria-describedby='fullNameHelp' placeholder='Enter your email' value='$mail' name='settings_email'>";
                                         ?>
-                                    </div>
-                                    <br>
-                                    <button type="button" class="btn btn-primary">Update Profile</button>
+                                      <br>
+                                    <button type="submit" class="btn btn-primary" name="updated">Update Profile</button>
                                     <button type="reset" class="btn btn-light">Reset Changes</button>
+                                    </div>
                                   </form>
                                 </div>
                                 <div class="tab-pane" id="account">
