@@ -41,22 +41,42 @@ include("auth_session.php");
         <div class="container-fluid text-light">
             <?php
               require('config.php');
+
                 if (isset($_POST['deleted'])){
                   $user_id = $_SESSION['id'];
                   $query = "DELETE FROM vendeur WHERE id='" . $user_id . "'";
                   $launch_query = $mysqli->query($query);
-                  echo "ALOOO";
                   if($launch_query){
-                    echo "OK";
                     $_SESSION['message']="Compte supprimé avec succès.";
                     header("Location: login.php");
                     exit(0);
                   }
                   else{
-                    echo "NON";
                     $_SESSION["message"]="Problème...";
                     header("Location : settings.php");
                     exit(0);
+                  }
+                }
+                
+                if(isset($_POST['old-pass'],$_POST['new-pass'],$_POST['confirm-new-pass'])){
+                  $old_pass = $_POST['old-pass'];
+                  $new_pass = $_POST['new-pass'];
+                  $confirm_new_pass = $_POST['confirm-new-pass'];
+
+                  $sql = "SELECT * FROM vendeur WHERE id = '".$_SESSION['id']."'";
+		              $query = $mysqli->query($sql);
+		              $row = $query->fetch_assoc();
+                  $phppass = $row['password'];
+                  if($row['password']!=$old_pass){
+                    echo "<p style='text-align:center;'>Ce n'est pas votre ancien mot de passe</p>";
+                  }
+                  else if($new_pass!=$confirm_new_pass){
+                    echo "<p style='text-align:center;'>Veuillez confirmer votre nouveau mot de passe</p>";
+                  }
+                  else{
+                    $sql = "UPDATE vendeur SET password = '".$new_pass."' WHERE id ='".$_SESSION['id']."'";
+                    $query = $mysqli->query($sql);
+                    echo "<p style='text-align:center;'>Mot de passe modifié avec succès</p>";
                   }
                 }
             ?>
@@ -182,7 +202,7 @@ include("auth_session.php");
                                   <hr>
                                   <form>
                                     <div class="form-group">
-                                        <label for="fullName">Full Name</label>
+                                        <label for="fullName">Username</label>
                                         <?php
                                           $usr = $_SESSION['username'];
                                           echo "<input type='text' class='form-control' id='fullName' aria-describedby='fullNameHelp' placeholder='Enter your fullname' value='$usr'>";
@@ -214,16 +234,17 @@ include("auth_session.php");
                                 <div class="tab-pane" id="security">
                                   <h6>SECURITY SETTINGS</h6>
                                   <hr>
-                                  <form>
+                                  <form method="post" >
                                     <div class="form-group">
                                       <label class="d-block">Change Password</label>
-                                      <input type="text" class="form-control" placeholder="Enter your old password">
-                                      <input type="text" class="form-control mt-1" placeholder="New password">
-                                      <input type="text" class="form-control mt-1" placeholder="Confirm new password">
+                                      <input type="text" class="form-control" placeholder="Enter your old password" id="old-pass" name="old-pass" required>
+                                      <input type="text" class="form-control mt-1" placeholder="New password" id="new-pass" name="new-pass" required>
+                                      <input type="text" class="form-control mt-1" placeholder="Confirm new password" id="confirm-new-pass" name="confirm-new-pass" required>
                                     </div>
+                                    <br>
+                                    <button type="submit" class="btn btn-primary">Change my password</button>
                                   </form>
-                                  <br>
-                                  <button type="button" class="btn btn-primary">Change my password</button>
+                    
                                 </div>
                               </div>
                           </div>
