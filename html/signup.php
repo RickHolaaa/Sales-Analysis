@@ -53,7 +53,7 @@
         <img src="../img/logo2.png" style="width:7%">
         <h7>SALESANALYSIS</h7>
         <div class="box">
-            <form autocomplete="off" method="post" name="login">
+            <form autocomplete="off" method="post" name="signup">
                 <h2>Sign up</h2>
                 <div class="inputBox">
                     <input type="text" required="required" name="username" id="username">
