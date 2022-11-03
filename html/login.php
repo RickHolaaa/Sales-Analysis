@@ -25,14 +25,25 @@
         $password = stripslashes($_REQUEST['password']);
         $password = mysqli_real_escape_string($mysqli, $password);
         $query = "SELECT * FROM `vendeur` WHERE username='$username' and password='$password'";
+        $query1 = "SELECT username FROM `vendeur` WHERE username='$username'";
         $result = mysqli_query($mysqli,$query) or die(mysql_error());
+        $result1 = mysqli_query($mysqli,$query1) or die(mysql_error());
         $rows = mysqli_num_rows($result);
-        if($rows==1){
-            $_SESSION['username'] = $username;
-            header("Location: index.php");
-        }else{
-            $message = "Le nom d'utilisateur ou le mot de passe est incorrect.";
-            echo $message;
+        $rows1 = mysqli_num_rows($result1);
+        if($rows1==1)
+        {
+            if($rows==1){
+                $_SESSION['username'] = $username;
+                header("Location: index.php");
+            }else{
+                $message = "Le nom d'utilisateur ou le mot de passe est incorrect.";
+                echo $message;
+            }
+        }
+        else
+        {
+            $message = "Compte inexistant. Veuillez creer un nouveau compte";
+            echo 'Compte inexistant. <a href="./signup.php">Veuillez creer un nouveau compte</a>';
         }
         }
         ?>
@@ -52,7 +63,7 @@
                     <i></i>
                 </div>
                 <div class="links">
-                    <a href="#">Forgot Password ?</a>
+                    <a href="./mail.php">Forgot Password ?</a>
                     <a href="./signup.php">Sign up</a>
                 </div>
                 <input type="submit" name="submit" value="Sign in">
