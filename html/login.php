@@ -20,31 +20,44 @@
         require('config.php');
         session_start();
         if (isset($_POST['username'])){
-        $username = stripslashes($_REQUEST['username']);
-        $username = mysqli_real_escape_string($mysqli, $username);
-        $password = stripslashes($_REQUEST['password']);
-        $password = mysqli_real_escape_string($mysqli, $password);
-        $query = "SELECT * FROM `vendeur` WHERE username='$username' and password='$password'";
-        $query1 = "SELECT username FROM `vendeur` WHERE username='$username'";
-        $result = mysqli_query($mysqli,$query) or die(mysql_error());
-        $result1 = mysqli_query($mysqli,$query1) or die(mysql_error());
-        $rows = mysqli_num_rows($result);
-        $rows1 = mysqli_num_rows($result1);
-        if($rows1==1)
-        {
-            if($rows==1){
-                $_SESSION['username'] = $username;
-                header("Location: index.php");
-            }else{
-                $message = "Le nom d'utilisateur ou le mot de passe est incorrect.";
-                echo $message;
+            // Récupérer les informations du formulaire
+            $username = stripslashes($_REQUEST['username']);
+            $username = mysqli_real_escape_string($mysqli, $username);
+            $password = stripslashes($_REQUEST['password']);
+            $password = mysqli_real_escape_string($mysqli, $password);
+            // Initialiser les variables de session
+            $_SESSION['username'] = $username;
+            $_SESSION['password'] = $password;
+            // EMAIL et ID
+            $sql = "SELECT * FROM `vendeur` WHERE username='$username' and password='$password'"; // On récupère les informations de l'utilisateur avec l'username et le mot de passe actuels
+            $query = $mysqli->query($sql);
+            $row = $query->fetch_assoc();
+            
+            if(isset($row['ID'])&&isset($row['email'])){
+                $_SESSION['id'] = $row['ID'];
+                $_SESSION['email'] = $row['email'];
             }
-        }
-        else
-        {
-            $message = "Compte inexistant. Veuillez creer un nouveau compte";
-            echo 'Compte inexistant. <a href="./signup.php">Veuillez creer un nouveau compte</a>';
-        }
+
+            $query = "SELECT * FROM `vendeur` WHERE username='$username' and password='$password'";
+            $query1 = "SELECT username FROM `vendeur` WHERE username='$username'";
+            $result = mysqli_query($mysqli,$query) or die(mysql_error());
+            $result1 = mysqli_query($mysqli,$query1) or die(mysql_error());
+            $rows = mysqli_num_rows($result);
+            $rows1 = mysqli_num_rows($result1);
+            if($rows1==1){
+                if($rows==1){
+                    $_SESSION['username'] = $username;
+                    header("Location: index.php");
+                } 
+                else{
+                    $message = "Le nom d'utilisateur ou le mot de passe est incorrect.";
+                    echo $message;
+                }
+            }
+            else{
+                $message = "Compte inexistant. Veuillez creer un nouveau compte";
+                echo 'Compte inexistant. <a href="./signup.php">Veuillez creer un nouveau compte</a>';
+            }
         }
         ?>
         <img src="../img/logo2.png" style="width:7%">

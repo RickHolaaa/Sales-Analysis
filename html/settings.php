@@ -40,67 +40,67 @@ include("auth_session.php");
     <body>
         <div class="container-fluid text-light">
             <?php
+            // On applique la configuration 
               require('config.php');
-
+            // Si on clique sur le bouton DELETE pour supprimer son compte
                 if (isset($_POST['deleted'])){
-                  $user_id = $_SESSION['id'];
-                  $query = "DELETE FROM vendeur WHERE id='" . $user_id . "'";
-                  $launch_query = $mysqli->query($query);
-                  if($launch_query){
-                    $_SESSION['message']="Compte supprimé avec succès.";
-                    header("Location: login.php");
+                  $user_id = $_SESSION['id']; // On récupère l'ID de l'utilisateur
+                  $query = "DELETE FROM vendeur WHERE id='" . $user_id . "'"; // Supprimer de la table "vendeur", l'utilisateur avec l'id actuel
+                  $launch_query = $mysqli->query($query); // On exécute la commande
+                  if($launch_query){ // Si la commande s'est bien exécutée
+                    $_SESSION['message']="Compte supprimé avec succès."; // Afficher un mot de succès
+                    header("Location: login.php"); // Renvoyer faire la page login
                     exit(0);
                   }
                   else{
-                    $_SESSION["message"]="Problème...";
+                    $_SESSION["message"]="Problème..."; //
                     header("Location : settings.php");
                     exit(0);
                   }
                 }
-                
+              // Si on veut changer de mot de passe
                 if(isset($_POST['old-pass'],$_POST['new-pass'],$_POST['confirm-new-pass'])){
-                  $old_pass = $_POST['old-pass'];
-                  $new_pass = $_POST['new-pass'];
-                  $confirm_new_pass = $_POST['confirm-new-pass'];
+                  $old_pass = $_POST['old-pass']; // On récupère l'ancien mot de passe du formulaire
+                  $new_pass = $_POST['new-pass']; // On récupère le nouveau mot de passe du formulaire
+                  $confirm_new_pass = $_POST['confirm-new-pass']; // On récupère la confirmation du nouveau mot de passe du formulaire
 
-                  $sql = "SELECT * FROM vendeur WHERE id = '".$_SESSION['id']."'";
-		              $query = $mysqli->query($sql);
-		              $row = $query->fetch_assoc();
-                  $phppass = $row['password'];
-                  if($row['password']!=$old_pass){
-                    echo "<p style='text-align:center;'>Ce n'est pas votre ancien mot de passe</p>";
+                  $sql = $_SESSION['password']; // On récupère les informations de l'utilisateur avec l'ID actuel
+                  $phppass = $sql;
+                  if($phppass!=$old_pass){ // Si le mot de passe (dans la base de données) ne correspond pas à l'ancien mot de passe du formulaire
+                    echo "<p style='text-align:center;'>Ancien mot de passe incorrect...</p>"; // Afficher un message d'erreur
                   }
-                  else if($new_pass!=$confirm_new_pass){
-                    echo "<p style='text-align:center;'>Veuillez confirmer votre nouveau mot de passe</p>";
+                  else if($new_pass!=$confirm_new_pass){ // Si le nouveau mot de passe du formulaire n'est pas répété 2 fois (confirmation)
+                    echo "<p style='text-align:center;'>Veuillez confirmer votre nouveau mot de passe</p>"; // Afficher un message d'erreur
                   }
                   else{
-                    $sql = "UPDATE vendeur SET password = '".$new_pass."' WHERE id ='".$_SESSION['id']."'";
-                    $query = $mysqli->query($sql);
+                    $sql = "UPDATE vendeur SET password = '".$new_pass."' WHERE id ='".$_SESSION['id']."'"; // Modifier le mot de passe (base de données) par le nouveau mot de passe du formulaire
+                    $query = $mysqli->query($sql); // Exécuter la commande
+                    $_SESSION['password'] = $new_pass;
                     echo "<p style='text-align:center;'>Mot de passe modifié avec succès</p>";
                   }
                 }
 
-                if (isset($_POST['updated'])){
-                  $get_usr = $_POST['settings_usr'];
-                  $get_email = $_POST['settings_email'];
-                  if(empty($_POST['settings_usr'])){//le champ pseudo est vide, on arrête l'exécution du script et on affiche un message d'erreur
-                    echo "Le champ username est vide.";
-                  } elseif(!preg_match("#^[a-z0-9A-Z]+$#",$_POST['settings_usr'])){//le champ pseudo est renseigné mais ne convient pas au format qu'on souhaite qu'il soit, soit: que des lettres minuscule + des chiffres (je préfère personnellement enregistrer le pseudo de mes membres en minuscule afin de ne pas avoir deux pseudo identique mais différents comme par exemple: Admin et admin)
-                      echo "L'username doit être renseigné en lettres minuscules sans accents, sans caractères spéciaux.";
+                if (isset($_POST['updated'])){ // Si on veut modifier l'username ou l'email
+                  $get_usr = $_POST['settings_usr']; // On récupère le nouveau username
+                  $get_email = $_POST['settings_email']; // On récupère le nouvel email
+                  if(empty($_POST['settings_usr'])){ //le champ pseudo est vide, on arrête l'exécution du script et on affiche un message d'erreur
+                    echo "<p style='text-align:center;'>Le champ username est vide.</p>";
+                  } elseif(!preg_match("#^[a-z0-9A-Z]+$#",$_POST['settings_usr'])){ //le champ pseudo est renseigné mais ne convient pas au format qu'on souhaite qu'il soit, soit: que des lettres minuscule + des chiffres (je préfère personnellement enregistrer le pseudo de mes membres en minuscule afin de ne pas avoir deux pseudo identique mais différents comme par exemple: Admin et admin)
+                      echo "<p style='text-align:center;'>L'username doit être renseigné en lettres minuscules sans accents, sans caractères spéciaux.</p>";
                   } elseif(strlen($_POST['settings_usr'])>25){//le pseudo est trop long, il dépasse 25 caractères
-                      echo "L'username est trop long, il dépasse 25 caractères.";
+                      echo "<p style='text-align:center;'>L'username est trop long, il dépasse 25 caractères.</p>";
                   } else { // Cas possible
-                    $sql = "SELECT * FROM vendeur WHERE id = '".$_SESSION['id']."'";
+                    $sql = "SELECT * FROM vendeur WHERE id = '".$_SESSION['id']."'"; // On récupère les informations de l'utilisateur avec l'ID actuel
                     $query = $mysqli->query($sql);
                     $row = $query->fetch_assoc();
-                    $phpusr = $row['username'];
-                    $phpemail = $row['email'];
+                    $phpusr = $row['username']; // On récupère l'username de l'ID associé
+                    $phpemail = $row['email']; // On récupère l'email de l'ID associé
                     
                     if(($phpusr==$get_usr)&&($phpemail==$get_email)){ // Si on valide sans rien modifier
                       echo "<p style='text-align:center;'>Vous n'avez rien modifié</p>";
                     } else if(($phpusr!=$get_usr)&&($phpemail==$get_email)){ // Si on valide en modifiant que l'username
-                      if(mysqli_num_rows(mysqli_query($mysqli,"SELECT * FROM vendeur WHERE username='".$_POST['settings_usr']."'"))==1){  // Si 
-                        echo "Cet username est déjà utilisé.";
+                      if(mysqli_num_rows(mysqli_query($mysqli,"SELECT * FROM vendeur WHERE username='".$_POST['settings_usr']."'"))==1){  // Si l'username est déjà présent dans la base de données
+                        echo "<p style='text-align:center;'>Cet username est déjà utilisé.</p>";
                       } else {
                         echo "<p style='text-align:center;'>Username modifié avec succès</p>";
                         $sql = "UPDATE vendeur SET username = '".$get_usr."' WHERE id ='".$_SESSION['id']."'";
@@ -108,11 +108,11 @@ include("auth_session.php");
                         $_SESSION['username']=$get_usr;
                       }
                     } else if(($phpusr==$get_usr)&&($phpemail!=$get_email)){ // Si on valide en modifiant que l'email
-                      if (mysqli_num_rows(mysqli_query($mysqli,"SELECT * FROM vendeur WHERE email='".$_POST['settings_email']."'"))==1){//on vérifie que ce pseudo n'est pas déjà utilisé par un autre membre
+                      if (mysqli_num_rows(mysqli_query($mysqli,"SELECT * FROM vendeur WHERE email='".$_POST['settings_email']."'"))==1){ // Si l'email est déjà présent dans la base de données
                         echo "Cet email est déjà utilisé.";
                       } else {
                         echo "<p style='text-align:center;'>Email modifié avec succès</p>";
-                        $sql = "UPDATE vendeur SET email = '".$get_email."' WHERE id ='".$_SESSION['id']."'";
+                        $sql = "UPDATE vendeur SET email = '".$get_email."' WHERE id ='".$_SESSION['id']."'"; // On modifie l'email (base de données) par l'email du formulaire
                         $query = $mysqli->query($sql);
                         $_SESSION['email']=$get_email;
                       }
@@ -121,12 +121,14 @@ include("auth_session.php");
                         echo "Cet username et ce mail sont déjà utilisés";
                       } else {
                         echo "<p style='text-align:center;'>Username et email modifiés avec succès</p>";
-                        $sql = "UPDATE vendeur SET username = '".$get_usr."' WHERE id ='".$_SESSION['id']."'";
+                        $sql = "UPDATE vendeur SET username = '".$get_usr."' WHERE id ='".$_SESSION['id']."'"; // On modifie l'username (base de données) par l'email du formulaire
                         $query = $mysqli->query($sql);
-                        $sql = "UPDATE vendeur SET email = '".$get_email."' WHERE id ='".$_SESSION['id']."'";
                         $query = $mysqli->query($sql);
-                        $_SESSION['username']=$get_usr;
-                        $_SESSION['email']=$get_email;
+                        $sql = "UPDATE vendeur SET email = '".$get_email."' WHERE id ='".$_SESSION['id']."'"; // On modifie l'email (base de données) par l'email du formulaire
+                        $query = $mysqli->query($sql);
+                        $query = $mysqli->query($sql);
+                        $_SESSION['username']=$get_usr; // On actualise l'username de la session
+                        $_SESSION['email']=$get_email; // On actualise l'email de la session
                       }
                     } else{
                       echo "ERREUR";
@@ -156,7 +158,7 @@ include("auth_session.php");
                                 </a>
                             </li>
                             <li class="nav-item">
-                              <a href="#" class="nav-link section">
+                              <a href="./statistics.php" class="nav-link section">
                                 <i class='fas fa-chart-bar mr-3 fa-fw'></i>
                                         Statistic
                                     </a>

@@ -15,7 +15,7 @@ body{
 .container-fluid{
     height: 100%;
     width: 100%;
-    background-color: #181921;
+    background-color: red;
 }
 
 .bg-menu{

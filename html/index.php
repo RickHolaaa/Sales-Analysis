@@ -63,7 +63,7 @@ include("auth_session.php");
                                 </a>
                             </li>
                             <li class="nav-item">
-                              <a href="#" class="nav-link section">
+                              <a href="./statistics.php" class="nav-link section">
                                 <i class='fas fa-chart-bar mr-3 fa-fw'></i>
                                         Statistic
                                     </a>
@@ -212,6 +212,7 @@ include("auth_session.php");
                             </div>
                         </div>
                     </div>
+                    <br><br><br><br>
                 </div>
             </div>
         </div>
