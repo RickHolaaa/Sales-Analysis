@@ -110,11 +110,15 @@ include("auth_session.php");
                                 global $mysqli;
                                 $sql = 'SELECT * from client';
                                 $query = $mysqli->query($sql);
-                                $row = $query->fetch_assoc();
-
+                                $row = $query->fetch_all(MYSQLI_ASSOC);
+                                $somme = 0;
+                                $cpt = 0;
                                 foreach($query as $client){
-                                    print_r($client);
+                                    print("<b>Nom :</b> ".$client['NOM'].", <b>Prénom :</b> ".$client['PRENOM'].", <b>Pays :</b> ".$client["PAYS"].", <b>Avis :</b> ".$client['AVIS']."<br>");
+                                    $somme+=$client["AVIS"];
+                                    $cpt++;
                                 }
+                                printf("Moyenne des avis : ".$somme/$cpt."<br>");
                             }
                             // Appel de la fonction affichage
                             //show_database();
@@ -188,6 +192,10 @@ include("auth_session.php");
                                 $query = $mysqli->query($sql);
                             }
                             //reset_client();
+
+                            reset_client();
+                            create_client(100);
+                            show_database();
                         ?>
                     </div>
                 </div>
