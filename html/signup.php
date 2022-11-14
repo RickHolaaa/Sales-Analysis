@@ -40,6 +40,46 @@
                     if(!mysqli_query($mysqli,"INSERT INTO vendeur SET username='".$_POST['username']."', password='".$_POST['password']."', email='".$_POST['email']."'")){//on crypte le mot de passe avec la fonction propre à PHP: md5()
                         echo "Une erreur s'est produite: ".mysqli_error($mysqli);//je conseille de ne pas afficher les erreurs aux visiteurs mais de l'enregistrer dans un fichier log
                     } else {
+                        $data = mysqli_query($mysqli,'SELECT MAX(id) AS max_id FROM client') or die(mysql_error());
+                        $row = mysqli_fetch_assoc($data);
+                        $numClient = $row['max_id'];
+                        for($i = 0; $i<10; $i++) {
+                            $nbr = rand(0,5);
+                            $sql="INSERT INTO CLIENT (NOM,PRENOM,PAYS,AVIS) VALUES((SELECT nom FROM Sheet1 ORDER BY RAND() LIMIT 1),(SELECT nom FROM Sheet1 ORDER BY RAND() LIMIT 1) ,(SELECT nom_en_gb FROM PAYS ORDER BY RAND() LIMIT 1),'$nbr')";
+                            $result = mysqli_query($mysqli,$sql);
+                            if (!$result) {
+                             die('Invalid query: ' . mysqli_error());
+                            }
+                        }
+                        for($i = 0; $i<10; $i++) {
+                            $nbr = rand($numClient+1,$numClient+10);
+                            $sql="INSERT INTO CLIENT_VENDEUR (ID_CLIENT,ID_VENDEUR) VALUES('$nbr',(SELECT id FROM vendeur WHERE username='".$_POST['username']."'))";
+                            $result = mysqli_query($mysqli,$sql);
+                            if (!$result) {
+                             die('Invalid query: ' . mysqli_error());
+                                }
+                        }
+                        $data = mysqli_query($mysqli,"SELECT id as id_user FROM vendeur WHERE username='".$_POST['username']."'") or die(mysql_error());
+                        $row = mysqli_fetch_assoc($data);
+                        $id = $row['id_user'];
+                        for($i = 1; $i<=4; $i++) {
+                            $rep=rand(1,2);
+                            for($j=1; $j<=$rep; $j++) {
+                                $sql="INSERT INTO jours_client (id_jours,id_client) VALUES($i,(SELECT ID_CLIENT FROM client_vendeur where ID_VENDEUR=$id ORDER BY RAND() LIMIT 1))";
+                                $result = mysqli_query($mysqli,$sql);
+                                if (!$result) {
+                                    die('Invalid query: ' . mysqli_error());
+                                }
+                            }
+                        }
+                        
+                        for($jours = 1; $jours<=4; $jours++) {
+                            $sql="INSERT INTO jours_vendeur (avis,id_jours, id_vendeur) VALUES((SELECT AVG(avis) FROM client,jours_client, client_vendeur where client.ID=jours_client.ID_CLIENT && jours_client.ID_JOURS=$jours && ID_VENDEUR=$id && client.ID=client_vendeur.ID_CLIENT),$jours,$id)";
+                            $result = mysqli_query($mysqli,$sql);
+                            if (!$result) {
+                            die('Invalid query: ' . mysqli_error());
+                            }
+                        }
                         echo "</br>Vous êtes inscrit avec succès!</br>";
                         echo "</br><a href='login.php'>Veuillez vous reconnecter</a>";
                         $_SESSION['email'] = $_POST['email'];

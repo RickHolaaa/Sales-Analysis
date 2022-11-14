@@ -63,7 +63,7 @@ include("auth_session.php");
                   $new_pass = $_POST['new-pass'];
                   $confirm_new_pass = $_POST['confirm-new-pass'];
 
-                  $sql = "SELECT * FROM vendeur WHERE id = '".$_SESSION['id']."'";
+                  $sql = "SELECT * FROM vendeur WHERE ID = '".$_SESSION['id']."'";
 		              $query = $mysqli->query($sql);
 		              $row = $query->fetch_assoc();
                   $phppass = $row['password'];
