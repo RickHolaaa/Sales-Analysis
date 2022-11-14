@@ -1,11 +1,5 @@
-html{
-    height: 100%;
-    width: 100%;
-}
-
-body{
-    width: 100%;
-    height: 100%;
+html, body, .container-fluid, .row{
+    font-family: 'Lato', sans-serif;
 }
 
 .row{
@@ -13,14 +7,12 @@ body{
 }
 
 .container-fluid{
-    height: 100%;
     width: 100%;
     background-color: #181921;
 }
 
 .bg-menu{
     background-color: #252831;
-    height: 100%;
     padding-top: 45px;
     width: 100%;
 }
@@ -39,10 +31,6 @@ body{
     text-align: center;
     display: inline;
     vertical-align: middle;
-}
-
-.nav-item{
-    margin-bottom: 15px;
 }
 
 .section{
@@ -70,17 +58,19 @@ body{
     background-color: #242732;
     border-radius: 20px;
     width: 100%;
+    margin-left: 0px;
 }
 
 .total-customer{
     background-color: #242732;
     width: 100%;
     border-radius: 20px;
+    vertical-align: middle;
 }
 
 .total-revenue{
     background-color: #242732;
-    width: 100%;
+    width: 100px;
     border-radius: 20px;
 }
 .total-profit{
@@ -93,7 +83,63 @@ body{
     display: flex;
     justify-content: space-between;
     text-align: center;
+    height: 110px;
 }
+
+.total-cust{
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+}
+
+.total-cust p{
+    vertical-align: bottom;
+    margin-bottom: 0px;
+}
+
+.total-cust .pourc{
+    color: #e33b35;
+    font-size: 75%;
+    vertical-align: bottom;
+    margin-bottom: 0px;
+}
+
+.total-rev{
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+}
+
+.total-rev p{
+    vertical-align: bottom;
+    margin-bottom: 0px;
+}
+
+.total-rev .pourc{
+    color: #35e3a0;
+    font-size: 75%;
+    vertical-align: bottom;
+    margin-bottom: 0px;
+}
+
+.total-prof{
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+}
+
+.total-prof p{
+    vertical-align: bottom;
+    margin-bottom: 0px;
+}
+
+.total-prof .pourc{
+    color: #e33b35;
+    font-size: 75%;
+    vertical-align: bottom;
+    margin-bottom: 0px;
+}
+
 
 .date-select{
     width: 100%;
@@ -102,6 +148,26 @@ body{
     justify-content: space-between;
     margin-right: 30px;
     margin-left: 20px;
+}
+
+.date-select .arrows{
+    width: 50px;
+    height: 24px;
+}
+
+.date-select .arrows a{
+    width: 50px;
+    padding-left: 5px;
+    padding-right: 5px;
+}
+
+.date-select .arrows a:hover{
+    width: 100px;
+    height: 100px;
+    color: #242732;
+    background-color: #60C8FB;
+    border-radius: 50%;
+    font-weight: bold;
 }
 
 .date-select p{
@@ -124,7 +190,6 @@ body{
     margin-left: 20px;
     margin-right: 40px;
     vertical-align: middle;
-    margin-bottom: 5px;
 }
 
 .jour-num .day{
@@ -149,23 +214,28 @@ body{
 }
 
 #map{
-    height: 260px;
-    width: 500px;
+    height: 100%;
+    width: 100%;
 }
 
 .memojis{
     display: flex;
     justify-content: space-between;
+    height: 75%;
 }
 
-.memoji{
-    text-align: center;
-    background-color: #242732;
-    padding: 30px;
-    border-radius: 20%;
+.memojis .memoji{
+    height: 100%;
+    width: 100%;
 }
 
-.memoji h5{
+.memojis .memoji img{
+    width: 75px;
+    margin-top: -20px;
+}
+
+.memojis .memoji h5{
+    margin-right: 0px;
     text-align: center;
-    margin-right: 20px;
+    margin-bottom: 30px;
 }

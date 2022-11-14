@@ -1,0 +1,42 @@
+html{
+    height: 100%;
+    width: 100%;
+}
+
+body{
+    width: 100%;
+    height: 100%;
+}
+
+.row{
+    height: 100%;
+}
+
+.container-fluid{
+    height: 100%;
+    width: 100%;
+    background-color: #181921;
+}
+
+form{
+    text-align: center;
+    margin: auto;
+    background-color: #252831;
+    padding: 50px;
+}
+
+#email{
+    margin-left: 25px;
+}
+
+.mail{
+    margin-bottom: 25px;
+}
+
+#send{
+    width: 100%;
+}
+
+h3{
+    margin-bottom: 50px;
+}

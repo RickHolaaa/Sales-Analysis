@@ -8,7 +8,12 @@
         <!-- CSS -->
         <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" />
         <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.2.0/css/all.css" />
-        <link rel="stylesheet" href="../css/style_signin.css">
+        <style>
+            <?php 
+                session_start();
+                include("../css/style_signup.css"); 
+            ?>
+        </style>
         <link rel="shortcut icon" hrsef="../img/Logo.png">
         <!-- JavaScripts -->
         <script src="https://code.jquery.com/jquery-3.4.1.slim.min.js"></script>
@@ -18,7 +23,6 @@
     <body class="gradient-background">
         <?php
             require('config.php');
-            session_start();
             if(isset($_POST['username'],$_POST['password'])){//l'utilisateur à cliqué sur "S'inscrire", on demande donc si les champs sont défini avec "isset"
                 if(empty($_POST['username'])){//le champ pseudo est vide, on arrête l'exécution du script et on affiche un message d'erreur
                     echo "Le champ username est vide.";
@@ -86,12 +90,28 @@
                         $email = $_SESSION['email'];
                         $_SESSION['id'] = $mysqli->insert_id;
                         $id = $_SESSION['id'];
+                        $_SESSION['message'] = "success";
                     }
                 }
             }
+
+            if(isset($_SESSION["message"])){
+                print '<div id="box-info">
+                            <h5 class="info">Thanks ! your account has been successfully created.</h5>
+                        </div>';
+                unset($_SESSION['message']);
+            }
+
         ?>
+
+        <!--
+        <div id="box-info">
+            print(<h5 class="info">Test</h5>
+        </div>
+        -->
         <img src="../img/logo2.png" style="width:7%">
-        <h7>SALESANALYSIS</h7>
+        <h7 style="color:white;">SALESANALYSIS</h7>
+        <br>
         <div class="box">
             <form autocomplete="off" method="post" name="signup">
                 <h2>Sign up</h2>
