@@ -190,8 +190,8 @@ include("auth_session.php");
                             }
                             //reset_client();
 
-                            reset_client();
-                            create_client(100);
+                            //reset_client();
+                            //create_client(100);
                         ?>
                     <?php 
                         show_database();
