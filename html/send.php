@@ -126,7 +126,6 @@
             echo "FALSE4";
         }
         
-     //Arret video 24:12
     }
     else
     {
