@@ -25,7 +25,7 @@
                     <div class="mail">
                         <label>Email</label><input type="email" name="email" id="email" placeholder="Enter your email address">
                     </div>
-                    <button type="submit" name="password_update" id="send">Send</button>
+                    <button type="submit" name="send" id="send">Send</button>
                 </form>
             </div>
         </div>
