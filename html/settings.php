@@ -66,7 +66,6 @@ include("auth_session.php");
                   $old_pass = $_POST['old-pass']; // On récupère l'ancien mot de passe du formulaire
                   $new_pass = $_POST['new-pass']; // On récupère le nouveau mot de passe du formulaire
                   $confirm_new_pass = $_POST['confirm-new-pass']; // On récupère la confirmation du nouveau mot de passe du formulaire
-
                   $sql = "SELECT * FROM vendeur WHERE ID = '".$_SESSION['id']."'";
 		              $query = $mysqli->query($sql);
 		              $row = $query->fetch_assoc();
