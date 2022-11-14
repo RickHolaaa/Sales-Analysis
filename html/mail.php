@@ -23,11 +23,7 @@
                 <form class="" action="send.php" method="POST">
                     <h3>Reset your password</h3>
                     <div class="mail">
-<<<<<<< HEAD
                         <label>Email</label><input type="email" name="email" id="email" placeholder="Enter your email address">
-=======
-                        <label>Email</label><input type="email" name="email" id="email" placeholder="Enter your email" value="">
->>>>>>> fc51cb0a963c3d4eacc640cb1dccda3cf716c97f
                     </div>
                     <button type="submit" name="password_update" id="send">Send</button>
                 </form>
