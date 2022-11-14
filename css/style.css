@@ -233,6 +233,7 @@ html, body, .container-fluid, .row{
     justify-content: center;
     align-items: center;
     flex-direction: column;
+   border-radius: 30%;
 }
 
 .memojis .memoji img{
@@ -246,4 +247,8 @@ html, body, .container-fluid, .row{
     margin-right: 0px;
     text-align: center;
     margin-bottom: 0px;
+}
+
+#map{
+    background-color: red;
 }

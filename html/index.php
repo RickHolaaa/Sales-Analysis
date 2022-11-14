@@ -238,9 +238,7 @@
                                     </div>
                                 </div>
                             </div>
-                            <p>dsdssd</p>
-                            <p>dsdssd</p><p>dsdssd</p><p>dsdssd</p>
-                            </div>
+                        </div>
                     </div>
                     <br><br><br>
                 </div>

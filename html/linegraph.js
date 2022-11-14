@@ -1,6 +1,6 @@
 $(document).ready(function(){
   $.ajax({
-    url : "http://localhost/sales-analysis/html/avisdata.php",
+    url : "http://localhost:8888/sales-analysis/html/avisdata.php",
     type : "GET",
     success : function(data){
       console.log(data);
@@ -19,11 +19,11 @@ $(document).ready(function(){
           {
             label: "Avis",
             fill: false,
-            lineTension: 0.1,
-            backgroundColor: "rgba(59, 89, 152, 0.75)",
-            borderColor: "rgba(59, 89, 152, 1)",
-            pointHoverBackgroundColor: "rgba(59, 89, 152, 1)",
-            pointHoverBorderColor: "rgba(59, 89, 152, 1)",
+            lineTension: 0.4,
+            backgroundColor: "#60C8FB",
+            borderColor: "rgb(83, 181, 226)",
+            pointHoverBackgroundColor: "rgb(96, 200, 251)",
+            pointHoverBorderColor: "rgb(96, 200, 251)",
             data: avis
           },
         ]
@@ -35,6 +35,7 @@ $(document).ready(function(){
         type: 'line',
         data: chartdata
       });
+
     },
     error : function(data) {
 

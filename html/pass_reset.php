@@ -24,7 +24,7 @@
                 <h3>Reset your password</h3>
                 <input type="hidden" name="password_token" value="<?php if(isset($_GET['token'])){echo $_GET['token'];}  ?>">
                 <div class="mail">
-                    <input type="email" name="email" id="email" value="your@email.com">
+                    <input type="email" name="email" id="email" value="<?php if(isset($_GET['email'])){echo $_GET['email'];}  ?>">
                 </div>
                 <div class="new-password">
                     <input type="text" name="new_password" id="new_pass" placeholder="Enter your new password">
@@ -33,7 +33,7 @@
                     <input type="text" name="confirm_password" id="confirm_pass" placeholder="Confirm your new password">
                 </div>
                 <br><br>
-                <button type="submit" name="send" id="send">Change Password</button>
+                <button type="submit" name="password_update" id="send">Change Password</button>
             </form>
         </div>
     </div>
