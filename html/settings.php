@@ -13,7 +13,10 @@ include("auth_session.php");
         <!-- CSS -->
         <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" />
         <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.2.0/css/all.css" />
-        <link rel='stylesheet' href='../css/style_settings.css'/>
+        
+        <style>
+            <?php include('../css/style_settings.css'); ?>
+        </style>
         <link rel="shortcut icon" href="../img/free-bar-chart-icon-676-thumb.png">
         <!-- JavaScripts -->
         <script src="https://code.jquery.com/jquery-3.4.1.slim.min.js"></script>
@@ -170,12 +173,6 @@ include("auth_session.php");
                                     </a>
                             </li>
                             <li class="nav-item">
-                                <a href="#" class="nav-link section">
-                                    <i class='fas fa-user-shield mr-3 fa-fw'></i>
-                                          Help
-                                      </a>
-                            </li>
-                            <li class="nav-item">
                                 <a href="./settings.php" class="nav-link section">
                                     <i class='fa fa-user-circle mr-3 fa-fw'></i>
                                         Settings
@@ -284,7 +281,33 @@ include("auth_session.php");
                                       <label class="d-block text-danger">Delete Account</label>
                                       <p class="text-muted font-size-sm">Once you delete your account, there is no going back. Please be certain.</p>
                                     </div>
-                                    <button class="btn btn-danger" name="deleted" type="submit" value="deleted" id="deleted">Delete Account</button>
+                                    
+                                    <!-- Button trigger modal -->
+                                    <button type="button" class="btn btn-danger" data-toggle="modal" data-target="#delete-password">
+                                      Delete Account
+                                    </button>
+
+                                    <!-- Modal -->
+                                    <div class="modal fade" id="delete-password" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                                      <div class="modal-dialog" role="document">
+                                        <div class="modal-content" style="background-color:#252831;">
+                                          <div class="modal-header border-0">
+                                            <h5 class="modal-title" id="exampleModalLabel">You're about to delete your account</h5>
+                                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                              <span aria-hidden="true" style="color:white;">&times;</span>
+                                            </button>
+                                          </div>
+                                          <div class="modal-body border-0">
+                                            <p style="color: #9E9DA3; font-size: 15px;"> Do you really want to delete your account ? This process cannot be undone.</p>
+                                          </div>
+                                          <div class="modal-footer border-0">
+                                            <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancel</button>
+                                            <button class="btn btn-danger" name="deleted" type="submit" value="deleted" id="deleted">Delete</button>
+                                          </div>
+                                        </div>
+                                      </div>
+                                    </div>
+
                                   </form>
                                 </div>
                                 <div class="tab-pane" id="security">

@@ -1,11 +1,13 @@
-html{
+html, body, .row, .container-fluid{
+    font-family: 'Lato', sans-serif;
+    /* Height and width fallback for older browsers. */
     height: 100%;
     width: 100%;
-}
 
-body{
-    width: 100%;
+    /* Set the height to match that of the viewport. */
+    height: 100vh;
     height: 100%;
+    width: 100%;
 }
 
 .row{
@@ -13,14 +15,12 @@ body{
 }
 
 .container-fluid{
-    height: 100%;
     width: 100%;
-    background-color: red;
+    background-color: #181921;
 }
 
 .bg-menu{
     background-color: #252831;
-    height: 100%;
     padding-top: 45px;
     width: 100%;
 }

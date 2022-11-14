@@ -47,6 +47,7 @@
         <link rel="stylesheet" type="text/css" href="https://cdn.anychart.com/releases/8.9.0/fonts/css/anychart-font.min.css">
         <script src="../js/map.js"></script>
     </head>
+
     <body style="background-color:#181921;">
         <div class="container-fluid text-light">
             <div class="row">
@@ -83,12 +84,6 @@
                                     </a>
                             </li>
                             <li class="nav-item">
-                                <a href="#" class="nav-link section">
-                                    <i class='fas fa-user-shield mr-3 fa-fw'></i>
-                                          Help
-                                      </a>
-                            </li>
-                            <li class="nav-item">
                                 <a href="./settings.php" class="nav-link section">
                                     <i class='fa fa-user-circle mr-3 fa-fw'></i>
                                         Settings
@@ -109,6 +104,7 @@
                                 <p>Hey, <?php echo $_SESSION['username']; ?>!</p>
                                 <p>You are now user dashboard page.</p>
                             </div>
+
                             <div class="col-md-4 pt-5 pb-5">
                             <!--SearchBar-->
                                 <div class="input-group">
@@ -118,6 +114,7 @@
                                     </span>
                                 </div>
                             </div>
+
                             <div class="col-md-4 pt-5 profile pr-5 pb-5">
                             <!--Profile-->
                                 <div class="icons">

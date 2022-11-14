@@ -13,7 +13,11 @@ include("auth_session.php");
         <!-- CSS -->
         <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" />
         <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.2.0/css/all.css" />
-        <link rel="stylesheet" href="../css/style_stat.css"/>
+        
+        <style>
+            <?php include('../css/style_stat.css'); ?>
+        </style>
+
         <link rel="shortcut icon" href="../img/free-bar-chart-icon-676-thumb.png">
         <!-- JavaScripts -->
         <script src="https://code.jquery.com/jquery-3.4.1.slim.min.js"></script>
@@ -57,12 +61,6 @@ include("auth_session.php");
                                     </a>
                             </li>
                             <li class="nav-item">
-                                <a href="#" class="nav-link section">
-                                    <i class='fas fa-user-shield mr-3 fa-fw'></i>
-                                          Help
-                                      </a>
-                            </li>
-                            <li class="nav-item">
                                 <a href="./settings.php" class="nav-link section">
                                     <i class='fa fa-user-circle mr-3 fa-fw'></i>
                                         Settings
@@ -101,7 +99,6 @@ include("auth_session.php");
                         </div>
                     </div>
                         <!--Map representation-->
-                    <div class="container graph">
                         <?php
                             // Fonction : affichage des clients
                             require('config.php');
@@ -114,7 +111,7 @@ include("auth_session.php");
                                 $somme = 0;
                                 $cpt = 0;
                                 foreach($query as $client){
-                                    print("<b>Nom :</b> ".$client['NOM'].", <b>Prénom :</b> ".$client['PRENOM'].", <b>Pays :</b> ".$client["PAYS"].", <b>Avis :</b> ".$client['AVIS']."<br>");
+                                    print("<p><b>Nom :</b> ".$client['NOM'].", <b>Prénom :</b> ".$client['PRENOM'].", <b>Pays :</b> ".$client["PAYS"].", <b>Avis :</b> ".$client['AVIS']."</p>");
                                     $somme+=$client["AVIS"];
                                     $cpt++;
                                 }
@@ -195,9 +192,11 @@ include("auth_session.php");
 
                             reset_client();
                             create_client(100);
-                            show_database();
                         ?>
-                    </div>
+                    <?php 
+                        show_database();
+                        print($_SESSION['username']);
+                    ?>
                 </div>
             </div>
         </div>

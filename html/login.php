@@ -8,7 +8,7 @@
         <!-- CSS -->
         <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" />
         <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.2.0/css/all.css" />
-        <link rel="stylesheet" href="../css/style_signup.css">
+        <link rel="stylesheet" href="../css/style_signup.css" />
         <link rel="shortcut icon" hrsef="../img/Logo.png">
         <!-- JavaScripts -->
         <script src="https://code.jquery.com/jquery-3.4.1.slim.min.js"></script>
@@ -61,7 +61,8 @@
         }
         ?>
         <img src="../img/logo2.png" style="width:7%">
-        <h7>SALESANALYSIS</h7>
+        <h7 style="color:white;">SALESANALYSIS</h7>
+        <br><br>
         <div class="box">
             <form autocomplete="off" method="post" name="login">
                 <h2>Sign in</h2>
