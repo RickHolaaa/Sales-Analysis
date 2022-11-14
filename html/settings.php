@@ -67,10 +67,19 @@ include("auth_session.php");
                   $new_pass = $_POST['new-pass']; // On récupère le nouveau mot de passe du formulaire
                   $confirm_new_pass = $_POST['confirm-new-pass']; // On récupère la confirmation du nouveau mot de passe du formulaire
 
+<<<<<<< HEAD
+                  $sql = "SELECT * FROM vendeur WHERE ID = '".$_SESSION['id']."'";
+		              $query = $mysqli->query($sql);
+		              $row = $query->fetch_assoc();
+                  $phppass = $row['password'];
+                  if($row['password']!=$old_pass){
+                    echo "<p style='text-align:center;'>Ce n'est pas votre ancien mot de passe</p>";
+=======
                   $sql = $_SESSION['password']; // On récupère les informations de l'utilisateur avec l'ID actuel
                   $phppass = $sql;
                   if($phppass!=$old_pass){ // Si le mot de passe (dans la base de données) ne correspond pas à l'ancien mot de passe du formulaire
                     echo "<p style='text-align:center;'>Ancien mot de passe incorrect...</p>"; // Afficher un message d'erreur
+>>>>>>> f946316bc830b81c6313d4d05dd3d3a94d14fa30
                   }
                   else if($new_pass!=$confirm_new_pass){ // Si le nouveau mot de passe du formulaire n'est pas répété 2 fois (confirmation)
                     echo "<p style='text-align:center;'>Veuillez confirmer votre nouveau mot de passe</p>"; // Afficher un message d'erreur

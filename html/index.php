@@ -29,6 +29,10 @@
         <script src="https://code.jquery.com/jquery-3.4.1.slim.min.js"></script>
         <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js"></script>
         <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js"></script>
+        <!-- javascript pour le graph des avis-->
+        <script type="text/javascript" src="./jquery.min.js"></script>
+        <script type="text/javascript" src="./Chart.min.js"></script>
+        <script type="text/javascript" src="./linegraph.js"></script>
 
         <!--Any Chart-->
         <script src="https://cdn.anychart.com/releases/8.9.0/js/anychart-base.min.js"></script>
@@ -211,6 +215,9 @@
                                     <!--Chart customer satisfaction-->
                                     <div class="col-md-6" style="margin-top:-15px;">
                                         <h3>Customer satisfaction</h3>
+                                        <div class="chart-container">
+                                            <canvas id="mycanvas"></canvas>
+                                        </div>
                                     </div>
                                     <!--3Memsojis-->
                                     <div class="col-md-6" style="margin-top:50px;">
