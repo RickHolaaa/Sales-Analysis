@@ -23,7 +23,7 @@
                 <form class="" action="send.php" method="POST">
                     <h3>Reset your password</h3>
                     <div class="mail">
-                        <label>Email</label><input type="email" name="email" id="email" value="Email">
+                        <label>Email</label><input type="email" name="email" id="email" placeholder="Enter your email" value="">
                     </div>
                     <button type="submit" name="send" id="send">Send</button>
                 </form>
