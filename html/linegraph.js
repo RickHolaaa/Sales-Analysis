@@ -19,7 +19,11 @@ $(document).ready(function(){
           {
             label: "Reviews",
             fill: false,
+<<<<<<< HEAD
+            lineTension: 0.6,
+=======
             lineTension: 0.4,
+>>>>>>> 50fabd190e158e4a27a185082cd1cefcbdf33047
             backgroundColor: "#60C8FB",
             borderColor: "rgb(83, 181, 226)",
             pointHoverBackgroundColor: "rgb(96, 200, 251)",

@@ -27,10 +27,10 @@
                     <input type="email" name="email" id="email" value="<?php if(isset($_GET['email'])){echo $_GET['email'];}  ?>">
                 </div>
                 <div class="new-password">
-                    <input type="text" name="new_password" id="new_pass" placeholder="Enter your new password">
+                    <input type="password" name="new_password" id="new_pass" placeholder="Enter your new password">
                 </div>
                 <div class="confirm-password">
-                    <input type="text" name="confirm_password" id="confirm_pass" placeholder="Confirm your new password">
+                    <input type="password" name="confirm_password" id="confirm_pass" placeholder="Confirm your new password">
                 </div>
                 <br><br>
                 <button type="submit" name="password_update" id="send">Change Password</button>

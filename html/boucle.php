@@ -54,6 +54,13 @@
                 }
             }
             */
+            for($jours = 1; $jours<=26; $jours++) {
+                $sql="INSERT INTO jours () VALUES()";
+                $result = mysqli_query($mysqli,$sql);
+                if (!$result) {
+                die('Invalid query: ' . mysqli_error());
+                }
+            }
         ?>
         <p>Un paragraphe</p>
     </body>
