@@ -1,6 +1,6 @@
 $(document).ready(function(){
   $.ajax({
-    url : "http://localhost:8888/sales-analysis/html/avisdata.php",
+    url : "http://localhost/sales-analysis/html/avisdata.php",
     type : "GET",
     success : function(data){
       console.log(data);
@@ -17,7 +17,7 @@ $(document).ready(function(){
         labels: id_jours,
         datasets: [
           {
-            label: "Avis",
+            label: "Reviews",
             fill: false,
             lineTension: 0.4,
             backgroundColor: "#60C8FB",
@@ -26,14 +26,51 @@ $(document).ready(function(){
             pointHoverBorderColor: "rgb(96, 200, 251)",
             data: avis
           },
-        ]
+        ],
       };
+
+      const options = {
+        legend: {
+          display: false
+        },
+        responsive: true,
+        tooltips: {
+          mode: 'label',
+        },
+        hover: {
+          mode: 'nearest',
+          intersect: true
+        },
+        scales: {
+          xAxes: [{
+            display: true,
+            gridLines: {
+              display: true
+            },
+            scaleLabel: {
+              display: true,
+              labelString: 'by Day'
+            }
+          }],
+          yAxes: [{
+            display: true,
+            gridLines: {
+              display: true
+            },
+            scaleLabel: {
+              display: true,
+              labelString: 'Review (1 to 5 stars)'
+            }
+          }]
+        }
+      }
 
       var ctx = $("#mycanvas");
 
       var LineGraph = new Chart(ctx, {
         type: 'line',
-        data: chartdata
+        data: chartdata,
+        options: options
       });
 
     },

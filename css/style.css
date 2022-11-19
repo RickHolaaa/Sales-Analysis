@@ -1,6 +1,6 @@
 html, body, .container-fluid, .row{
     font-family: 'Lato', sans-serif;
-    height: 850px;
+    height: 1000px;
 }
 
 .row{
@@ -247,8 +247,4 @@ html, body, .container-fluid, .row{
     margin-right: 0px;
     text-align: center;
     margin-bottom: 0px;
-}
-
-#map{
-    background-color: red;
 }
