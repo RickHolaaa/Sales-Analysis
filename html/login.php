@@ -8,7 +8,7 @@
         <!-- CSS -->
         <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" />
         <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.2.0/css/all.css" />
-        <link rel="stylesheet" href="../css/style_signup.css" />
+        <link rel="stylesheet" href="../css/style_login.css" />
         <link rel="shortcut icon" hrsef="../img/Logo.png">
         <!-- JavaScripts -->
         <script src="https://code.jquery.com/jquery-3.4.1.slim.min.js"></script>

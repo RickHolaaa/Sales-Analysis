@@ -254,6 +254,10 @@ include("auth_session.php");
                                 <div class="tab-pane active" id="profile">
                                   <h6>YOUR PROFILE INFORMATION</h6>
                                   <hr>
+                                  <div class="change_profile">
+                                    <img>
+                                  </div>
+                                  <br>
                                   <form method="post">
                                     <div class="form-group">
                                         <label for="fullName">Username</label>

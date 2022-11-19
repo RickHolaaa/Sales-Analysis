@@ -73,3 +73,9 @@ body{
 .card{
     background-color: #252831;
 }
+
+.change_profile{
+    width: 150px;
+    height: 150px;
+    background-color: white;
+}

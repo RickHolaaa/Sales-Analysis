@@ -12,16 +12,13 @@
         <!-- CSS -->
         <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" />
         <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.2.0/css/all.css" />
-        <?php
-            echo "<link rel='stylesheet' href='../css/style.css'/>";
-        ?>
-        
+        <style>
+            <?php 
+                    include("../css/style.css"); 
+            ?>
+        </style>
         <style>
             @import url('https://fonts.googleapis.com/css2?family=Lato&display=swap');
-        </style>
-
-        <style>
-            <?php include('../css/style.css'); ?>
         </style>
 
         <link rel="shortcut icon" href="../img/free-bar-chart-icon-676-thumb.png">
@@ -45,10 +42,18 @@
         <script src="https://cdn.anychart.com/releases/8.9.0/js/anychart-exports.min.js"></script>
         <script src="https://cdn.anychart.com/releases/8.9.0/js/anychart-ui.min.js"></script>
 
-        <script src="https://cdn.anychart.com/releases/8.9.0/themes/dark_glamour.min.js"></script>
-
+        <script src="../js/dark.js"></script>
+        <script src="https://cdn.anychart.com/themes/2.0.0/coffee.min.js"></script>
+        <script src="https://cdn.anychart.com/themes/2.0.0/dark_blue.min.js"></script>
+            
         <link rel="stylesheet" type="text/css" href="https://cdn.anychart.com/releases/8.9.0/css/anychart-ui.min.css">
         <link rel="stylesheet" type="text/css" href="https://cdn.anychart.com/releases/8.9.0/fonts/css/anychart-font.min.css">
+        <script>
+            <?php 
+            require_once("../js/map.js");
+            require_once("./linegraph.js")
+            ?>
+        </script>
     </head>
     <style type="text/css">      
       #container { 
@@ -344,12 +349,14 @@
                                     <!--Chart customer satisfaction-->
                                     <div class="col-md-6" style="margin-top:-15px;">
                                         <h3>Customer satisfaction</h3>
+                                        <br><br>
                                         <div class="chart-container">
                                             <canvas id="mycanvas"></canvas>
                                         </div>
                                     </div>
                                     <!--3Memsojis-->
                                     <div class="col-md-6" style="margin-top:50px;">
+                                    <br>
                                         <div class="row memojis">
                                             <div class="col-md-3 memoji">
                                                 <img src="../img/memoji1.png">
@@ -367,9 +374,7 @@
                                     </div>
                                 </div>
                             </div>
-                            <p>dsdssd</p>
-                            <p>dsdssd</p><p>dsdssd</p><p>dsdssd</p>
-                            </div>
+                        </div>
                     </div>
                     <br><br><br>
                 </div>
