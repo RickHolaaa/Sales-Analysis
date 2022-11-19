@@ -30,7 +30,7 @@
             <h2>Hello</h2>
             <h3>You are receiving this email because we received a password reset request for your account.</h3>
             <br/><br/>
-            <a href='http://localhost:8888/sales-analysis/html/pass_reset.php?token=$token&email=$get_email'>Click Me </a>
+            <a href='http://localhost/sales-analysis/html/pass_reset.php?token=$token&email=$get_email'>Click Me </a>
         ";
         
         $mail->Body =$email_template;//Message contenu dans le mail
