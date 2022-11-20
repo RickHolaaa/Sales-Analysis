@@ -1,13 +1,8 @@
-html{
-    height: 100%;
-    width: 100%;
+html, body, .container-fluid, .row{
+    font-family: 'Lato', sans-serif;
+    height: 1000px;
+    background-color: #181921;
 }
-
-body{
-    width: 100%;
-    height: 100%;
-}
-
 .row{
     height: 100%;
 }
@@ -74,8 +69,51 @@ body{
     background-color: #252831;
 }
 
-.change_profile{
-    width: 150px;
-    height: 150px;
-    background-color: white;
+.profile_section{
+    padding: 10px;
+}
+
+.change_profile img{
+    background-color: #181921;
+    border-radius: 50%;
+}
+
+.img_upload{
+    margin-bottom: 15px;
+}
+
+.text_pict .text_pict_section button{
+    width: 200px;
+}
+
+.text_pict h3{
+    margin-bottom: 20px;
+    font-weight: bold;
+    text-transform: uppercase;
+}
+
+.btn-primary, .btn-primary:hover, .btn-primary:active, .btn-primary:visited {
+    background-color: #5FC8FF !important;
+    border: 2px solid #5FC8FF !important;
+    color: #181921 !important;
+}
+
+.cate{
+    background-color: #5FC8FF !important;
+    border: 2px solid #5FC8FF !important;
+    color: #181921 !important;
+}
+
+.cate:not(.active){
+    color: #5FC8FF !important;
+    background-color: #181921 !important;
+    border: 2px solid #181921 !important;
+}
+
+.text-danger{
+    color: #f96666 !important;
+}
+
+.btn-danger{
+    background-color: #f75151 !important;
 }

@@ -139,7 +139,89 @@ include("auth_session.php");
                     }
                   }
                 }
+
+                // On récupère l'image importé par l'utilisateur
+                if(isset($_POST['changed'])){
+                  $statusMsg = '';
+                  // Si on a déjà une image
+                  $sql = "SELECT IMAGE FROM image WHERE USERNAME_ID=".$_SESSION['id'];
+                  $result = $mysqli->query($sql);
+                  if($result->num_rows==0){
+                     // Si on importe un image
+                    if(!empty($_FILES['image']['name'])){
+                      // On récupère l'id de l'utilisateur
+                      $uid = $_SESSION['id'];
+                      // La liste des fichiers autorisés
+                      $allowTypes = array('image/jpg','image/png','image/jpeg','image/gif');
+                      $fileType = $_FILES['image']['type'];
+                      // Chemin vers l'image
+                      // Si le fichier a le bon type
+                      if(in_array($fileType,$allowTypes)){
+                        // Importer le fichier sur le serveur
+                        if(is_uploaded_file($_FILES['image']['tmp_name'])){
+                          // Récupérer le contenu de l'image
+                          $img_data = addslashes(file_get_contents($_FILES['image']['tmp_name']));
+                          $sql = "INSERT INTO image (USERNAME_ID,IMAGE) VALUES(".$uid.",'".$img_data."')";
+                          $query = $mysqli->query($sql);
+                          if($query){
+                            $statusMsg = "File uploaded sucessfully";
+                          }
+                          else{
+                            $statusMsg = "File upload failed, please try again.";
+                          }
+                        }
+                      }
+                      else{
+                        $statusMsg = "Sorry, only JPG, JPEG, PNG & GIF files are allowed to upload.";
+                      }
+                    }
+                    else{
+                      $statusMsg = "Please select a file to upload.";
+                    }
+                    echo $statusMsg;
+                  }
+                  else{
+                     // Si on importe un image
+                     if(!empty($_FILES['image']['name'])){
+                      // On récupère l'id de l'utilisateur
+                      $uid = $_SESSION['id'];
+                      // La liste des fichiers autorisés
+                      $allowTypes = array('image/jpg','image/png','image/jpeg','image/gif');
+                      $fileType = $_FILES['image']['type'];
+                      // Chemin vers l'image
+                      // Si le fichier a le bon type
+                      if(in_array($fileType,$allowTypes)){
+                        // Importer le fichier sur le serveur
+                        if(is_uploaded_file($_FILES['image']['tmp_name'])){
+                          // Récupérer le contenu de l'image
+                          $img_data = addslashes(file_get_contents($_FILES['image']['tmp_name']));
+                          $sql = "UPDATE image SET IMAGE='".$img_data."' WHERE USERNAME_ID=".$uid;
+                          $query = $mysqli->query($sql);
+                          if($query){
+                            $statusMsg = "File uploaded sucessfully";
+                          }
+                          else{
+                            $statusMsg = "File upload failed, please try again.";
+                          }
+                        }
+                      }
+                      else{
+                        $statusMsg = "Sorry, only PNG files are allowed to upload.";
+                      }
+                    }
+                    else{
+                      $statusMsg = "Please select a file to upload.";
+                    }
+                    echo $statusMsg;                    
+                  }
+
+              
+                }
             ?>
+            <div class="container">
+
+              
+            </div>
             <div class="row">
                 <div class="col-md-2 bg-menu">
                     <div class="logo">
@@ -204,13 +286,19 @@ include("auth_session.php");
                             <!--Profile-->
                                 <div class="icons">
                                     <a href="./messages.html">
-                                    <img class="" src="../img/ring.png" style="width: 12%;">
+                                    <img class="" src="../img/ring.png" style="width: 50px;">
                                     </a>
                                     <a href="./signup.html">
-                                        <img src="../img/memoji-iphone-ios-13-modified.png" style="width: 10%;"">
+                                    <?php 
+                                      $sql =  "SELECT IMAGE FROM image WHERE USERNAME_ID=".$_SESSION['id'];
+                                      $result = $mysqli->query($sql);
+                                      // Transformer en liste 
+                                      $row = $result->fetch_assoc();
+                                    ?>
+                                    <img src="data:image/png;charset=utf8;base64,<?php echo base64_encode($row['IMAGE']); ?>" width="43px">
                                     </a>
                                     <a href="logout.php">
-                                        <img class="" src="../img/lgout.png" style="width: 12%;">
+                                        <img class="" src="../img/lgout.png" style="width: 50px;">
                                     </a>
                                 </div>
                             </div>
@@ -223,13 +311,13 @@ include("auth_session.php");
 
                             <div class="card-body">
                                 <nav class="nav nav-pills">
-                                    <a href="#profile" data-toggle="tab" class="nav-item nav-link active">
+                                    <a href="#profile" data-toggle="tab" class="nav-item nav-link active cate">
                                     <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-user mr-2"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"></path><circle cx="12" cy="7" r="4"></circle></svg>Profile Information
                                     </a>
-                                    <a href="#account" data-toggle="tab" class="nav-item nav-link">
+                                    <a href="#account" data-toggle="tab" class="nav-item nav-link cate">
                                     <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-settings mr-2"><circle cx="12" cy="12" r="3"></circle><path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 0 1 0 2.83 2 2 0 0 1-2.83 0l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-2 2 2 2 0 0 1-2-2v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 0 1-2.83 0 2 2 0 0 1 0-2.83l.06-.06a1.65 1.65 0 0 0 .33-1.82 1.65 1.65 0 0 0-1.51-1H3a2 2 0 0 1-2-2 2 2 0 0 1 2-2h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 0 1 0-2.83 2 2 0 0 1 2.83 0l.06.06a1.65 1.65 0 0 0 1.82.33H9a1.65 1.65 0 0 0 1-1.51V3a2 2 0 0 1 2-2 2 2 0 0 1 2 2v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 0 1 2.83 0 2 2 0 0 1 0 2.83l-.06.06a1.65 1.65 0 0 0-.33 1.82V9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 0 1 2 2 2 2 0 0 1-2 2h-.09a1.65 1.65 0 0 0-1.51 1z"></path></svg>Account Settings
                                     </a>
-                                    <a href="#security" data-toggle="tab" class="nav-item nav-link">
+                                    <a href="#security" data-toggle="tab" class="nav-item nav-link cate">
                                     <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-shield mr-2"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"></path></svg>Security
                                     </a>
                                 </nav>
@@ -237,102 +325,108 @@ include("auth_session.php");
                         </div>
                         <br><br>
                         <div class="row">
-                              <div class="card-header d-md-none">
-                                <ul class="nav" role="tablist">
-                                  <li class="nav-item">
-                                    <a href="#profile" data-toggle="tab" class="nav-link"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-user"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"></path><circle cx="12" cy="7" r="4"></circle></svg></a>
-                                  </li>
-                                  <li class="nav-item">
-                                    <a href="#account" data-toggle="tab" class="nav-link"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-settings"><circle cx="12" cy="12" r="3"></circle><path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 0 1 0 2.83 2 2 0 0 1-2.83 0l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-2 2 2 2 0 0 1-2-2v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 0 1-2.83 0 2 2 0 0 1 0-2.83l.06-.06a1.65 1.65 0 0 0 .33-1.82 1.65 1.65 0 0 0-1.51-1H3a2 2 0 0 1-2-2 2 2 0 0 1 2-2h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 0 1 0-2.83 2 2 0 0 1 2.83 0l.06.06a1.65 1.65 0 0 0 1.82.33H9a1.65 1.65 0 0 0 1-1.51V3a2 2 0 0 1 2-2 2 2 0 0 1 2 2v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 0 1 2.83 0 2 2 0 0 1 0 2.83l-.06.06a1.65 1.65 0 0 0-.33 1.82V9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 0 1 2 2 2 2 0 0 1-2 2h-.09a1.65 1.65 0 0 0-1.51 1z"></path></svg></a>
-                                  </li>
-                                  <li class="nav-item">
-                                    <a href="#security" data-toggle="tab" class="nav-link"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-shield"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"></path></svg></a>
-                                  </li>
-                                </ul>
-                              </div>
-                              <div class="card-body tab-content">
-                                <div class="tab-pane active" id="profile">
-                                  <h6>YOUR PROFILE INFORMATION</h6>
-                                  <hr>
-                                  <div class="change_profile">
-                                    <img>
+                          <div class="card-body tab-content">
+                            <div class="tab-pane active" id="profile">
+                              <h6>YOUR PROFILE INFORMATION</h6>
+                              <hr>
+                              <div class="container profile_section">
+                                <div class="row change_profile">
+                                  <div class="col-md-3 pict">
+                                    <?php 
+                                      $sql =  "SELECT IMAGE FROM image WHERE USERNAME_ID=".$_SESSION['id'];
+                                      $result = $mysqli->query($sql);
+                                      // Transformer en liste 
+                                      $row = $result->fetch_assoc();
+                                    ?>
+                                    <img src="data:image/png;charset=utf8;base64,<?php echo base64_encode($row['IMAGE']); ?>" width="150px">
                                   </div>
-                                  <br>
-                                  <form method="post">
-                                    <div class="form-group">
-                                        <label for="fullName">Username</label>
-                                        <?php
-                                          $usr = $_SESSION['username'];
-                                          echo "<input type='text' class='form-control' id='fullName' aria-describedby='fullNameHelp' placeholder='Enter your fullname' value='$usr' name='settings_usr'>";
-                                        ?>
-                                      </div>
-                                    <div class="form-group">
-                                        <label for="email">Email</label>
-                                        <?php
-                                          $mail = $_SESSION['email'];
-                                          echo "<input type='text' class='form-control' id='email' aria-describedby='fullNameHelp' placeholder='Enter your email' value='$mail' name='settings_email'>";
-                                        ?>
-                                      <br>
-                                    <button type="submit" class="btn btn-primary" name="updated">Update Profile</button>
-                                    <button type="reset" class="btn btn-light">Reset Changes</button>
+                                  <div class="col-md-9 text_pict">
+                                    <div class="text_pict_section">
+                                      <h3>Change profile photo</h3>
+                                      <form method="post" enctype="multipart/form-data">
+                                        <input type="file" class="img_upload" name="image"><br>
+                                        <button type="submit" class="btn btn-primary" name="changed">Change</button>
+                                      </form>
                                     </div>
-                                  </form>
-                                </div>
-                                <div class="tab-pane" id="account">
-                                  <h6>ACCOUNT SETTINGS</h6>
-                                  <hr>
-                                  <form method="post">
-                                    <div class="form-group">
-                                      <label class="d-block text-danger">Delete Account</label>
-                                      <p class="text-muted font-size-sm">Once you delete your account, there is no going back. Please be certain.</p>
-                                    </div>
-                                    
-                                    <!-- Button trigger modal -->
-                                    <button type="button" class="btn btn-danger" data-toggle="modal" data-target="#delete-password">
-                                      Delete Account
-                                    </button>
-
-                                    <!-- Modal -->
-                                    <div class="modal fade" id="delete-password" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-                                      <div class="modal-dialog" role="document">
-                                        <div class="modal-content" style="background-color:#252831;">
-                                          <div class="modal-header border-0">
-                                            <h5 class="modal-title" id="exampleModalLabel">You're about to delete your account</h5>
-                                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                                              <span aria-hidden="true" style="color:white;">&times;</span>
-                                            </button>
-                                          </div>
-                                          <div class="modal-body border-0">
-                                            <p style="color: #9E9DA3; font-size: 15px;"> Do you really want to delete your account ? This process cannot be undone.</p>
-                                          </div>
-                                          <div class="modal-footer border-0">
-                                            <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancel</button>
-                                            <button class="btn btn-danger" name="deleted" type="submit" value="deleted" id="deleted">Delete</button>
-                                          </div>
-                                        </div>
-                                      </div>
-                                    </div>
-
-                                  </form>
-                                </div>
-                                <div class="tab-pane" id="security">
-                                  <h6>SECURITY SETTINGS</h6>
-                                  <hr>
-                                  <form method="post" >
-                                    <div class="form-group">
-                                      <label class="d-block">Change Password</label>
-                                      <input type="text" class="form-control" placeholder="Enter your old password" id="old-pass" name="old-pass" required>
-                                      <input type="text" class="form-control mt-1" placeholder="New password" id="new-pass" name="new-pass" required>
-                                      <input type="text" class="form-control mt-1" placeholder="Confirm new password" id="confirm-new-pass" name="confirm-new-pass" required>
-                                    </div>
-                                    <br>
-                                    <button type="submit" class="btn btn-primary">Change my password</button>
-                                  </form>
-                    
+                                  </div>
                                 </div>
                               </div>
+                              <br>
+                              <form method="post">
+                                <div class="form-group">
+                                    <label for="fullName">Username</label>
+                                    <?php
+                                      $usr = $_SESSION['username'];
+                                      echo "<input type='text' class='form-control' id='fullName' aria-describedby='fullNameHelp' placeholder='Enter your fullname' value='$usr' name='settings_usr'>";
+                                    ?>
+                                  </div>
+                                <div class="form-group">
+                                    <label for="email">Email</label>
+                                    <?php
+                                      $mail = $_SESSION['email'];
+                                      echo "<input type='text' class='form-control' id='email' aria-describedby='fullNameHelp' placeholder='Enter your email' value='$mail' name='settings_email'>";
+                                    ?>
+                                  <br>
+                                <button type="submit" class="btn btn-primary" name="updated">Update Profile</button>
+                                <button type="reset" class="btn btn-light">Reset Changes</button>
+                                </div>
+                              </form>
+                            </div>
+                            <div class="tab-pane" id="account">
+                              <h6>ACCOUNT SETTINGS</h6>
+                              <hr>
+                              <form method="post">
+                                <div class="form-group">
+                                  <label class="d-block text-danger">Delete Account</label>
+                                  <p class="text-muted font-size-sm">Once you delete your account, there is no going back. Please be certain.</p>
+                                </div>
+                                
+                                <!-- Button trigger modal -->
+                                <button type="button" class="btn btn-danger" data-toggle="modal" data-target="#delete-password">
+                                  Delete Account
+                                </button>
+
+                                <!-- Modal -->
+                                <div class="modal fade" id="delete-password" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                                  <div class="modal-dialog" role="document">
+                                    <div class="modal-content" style="background-color:#252831;">
+                                      <div class="modal-header border-0">
+                                        <h5 class="modal-title" id="exampleModalLabel">You're about to delete your account</h5>
+                                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                          <span aria-hidden="true" style="color:white;">&times;</span>
+                                        </button>
+                                      </div>
+                                      <div class="modal-body border-0">
+                                        <p style="color: #9E9DA3; font-size: 15px;"> Do you really want to delete your account ? This process cannot be undone.</p>
+                                      </div>
+                                      <div class="modal-footer border-0">
+                                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancel</button>
+                                        <button class="btn btn-danger" name="deleted" type="submit" value="deleted" id="deleted">Delete</button>
+                                      </div>
+                                    </div>
+                                  </div>
+                                </div>
+
+                              </form>
+                            </div>
+                            <div class="tab-pane" id="security">
+                              <h6>SECURITY SETTINGS</h6>
+                              <hr>
+                              <form method="post" >
+                                <div class="form-group">
+                                  <label class="d-block">Change Password</label>
+                                  <input type="text" class="form-control" placeholder="Enter your old password" id="old-pass" name="old-pass" required>
+                                  <input type="text" class="form-control mt-1" placeholder="New password" id="new-pass" name="new-pass" required>
+                                  <input type="text" class="form-control mt-1" placeholder="Confirm new password" id="confirm-new-pass" name="confirm-new-pass" required>
+                                </div>
+                                <br>
+                                <button type="submit" class="btn btn-primary">Change my password</button>
+                              </form>
+                
+                            </div>
                           </div>
                       </div>
+                  </div>
                 </div>
             </div>
         </div>

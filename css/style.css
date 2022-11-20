@@ -34,6 +34,10 @@ html, body, .container-fluid, .row{
     vertical-align: middle;
 }
 
+.nav-item{
+    margin-bottom: 15px;
+}
+
 .section{
     color: #ABB2C6;
 }
