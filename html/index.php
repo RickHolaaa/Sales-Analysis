@@ -1,6 +1,7 @@
 <?php
     //include auth_session.php file on all user panel pages
     include("auth_session.php");
+    require("config.php");
 ?>
 <!DOCTYPE html>
 <html lang="fr">
@@ -12,6 +13,7 @@
         <!-- CSS -->
         <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" />
         <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.2.0/css/all.css" />
+        <link rel="stylesheet" href="../css/" />
         <style>
             <?php 
                     include("../css/style.css"); 
@@ -65,6 +67,10 @@
     </style>
 
     <body style="background-color:#181921;">
+    
+    <script>
+        jQuery(window).load(function(){ jQuery(".loader").fadeOut("200"); });
+    </script>
         <div class="container-fluid text-light">
             <div class="row">
                 <div class="col-md-2 bg-menu">
@@ -157,7 +163,7 @@
                                         <div class="row calendar pl-3 pt-3 mb-3">
                                             <!-- August 2022    <  > -->
                                             <div class="date-select">
-                                                <p style="font-weight:bold;">August 2022</p>
+                                                <p style="font-weight:bold;">October 2022</p>
                                                 <div class="arrows">
                                                     <a><</a>
                                                     <a>></a>
@@ -166,57 +172,80 @@
                                             <!-- Mo Tu We Th Fri Sa-->
                                             <br>
                                             <div class="row jour">
+                                                <p>Sa</p>
+                                                <p>Su</p>
                                                 <p>Mo</p>
                                                 <p>Tu</p>
                                                 <p>We</p>
                                                 <p>Th</p>
                                                 <p>Fri</p>
                                                 <p>Sa</p>
-                                                <p>Su</p>
-                                                <p>Mo</p>
                                             </div>
                                             <!-- 24 25 26 27 28 29-->
+                                          
                                             <div class="row jour-num">
-                                                <p class="actual-day">24</p>
-                                                <p class="day">25</p>
-                                                <p class="day">26</p>
-                                                <p class="day">27</p>
-                                                <p class="day">28</p>
-                                                <p class="day">29</p>
-                                                <p class="day">30</p>
-                                                <p class="day">01</p>
+                                            <form method="post" action="">
+                                            <input class="day" type="submit" value="1" name="btn">
+                                            <input class="day" type="submit" value="2" name="btn">
+                                            <input class="day" type="submit" value="3" name="btn">
+                                            <input class="day" type="submit" value="4" name="btn">
+                                            <input class="day" type="submit" value="5" name="btn">
+                                            <input class="day" type="submit" value="6" name="btn">
+                                            <input class="day" type="submit" value="7" name="btn">
+                                            <input class="day" type="submit" value="8" name="btn">
+                                            </form>
                                             </div>
-                                        </div>
-                                        <!--TotalCustomer TotalRevenue TotalPRofit-->
-                                        <div class="row total gy-3">
-                                            <div class="col-3 total-customer pt-3 pb-3">
-                                                <p style="font-size: 100%;">Total Customer</p>
-                                                <div class="total-cust">
-                                                    <p>$45.52</p>
-                                                    <p class="pourc">-2.3%</p>
-                                                </div>
+                                            <div class="row jour-num">
+                                            <form method="post" action="">
+                                            <input class="actual-day" type="submit" value="9" name="btn">
+                                            <input class="day" type="submit" value="10" name="btn">
+                                            <input class="day" type="submit" value="11" name="btn">
+                                            <input class="day" type="submit" value="12" name="btn">
+                                            <input class="day" type="submit" value="13" name="btn">
+                                            <input class="day" type="submit" value="14" name="btn">
+                                            <input class="day" type="submit" value="15" name="btn">
+                                            <input class="day" type="submit" value="16" name="btn">
+                                            </form>
                                             </div>
-                                            <div class="col-3 total-revenue pt-3 pb-3">
-                                                <p style="font-size: 100%;">Total <br> Revenue</p>
-                                                <div class="total-rev">
-                                                    <p>$306.56</p>
-                                                    <p class="pourc">+4.2%</p>
-                                                </div>
+                                            <div class="row jour-num">
+                                            <form method="post" action="">
+                                            <input class="day" type="submit" value="17" name="btn">
+                                            <input class="day" type="submit" value="18" name="btn">
+                                            <input class="day" type="submit" value="19" name="btn">
+                                            <input class="day" type="submit" value="20" name="btn">
+                                            <input class="day" type="submit" value="21" name="btn">
+                                            <input class="day" type="submit" value="22" name="btn">
+                                            <input class="day" type="submit" value="23" name="btn">
+                                            <input class="day" type="submit" value="24" name="btn">
+                                            </form>
                                             </div>
-                                            <div class="col-3 total-profit pl-3 pt-3 pb-3">
-                                                <p style="font-size: 100%;">Total <br> Profit</p>
-                                                <div class="total-prof">
-                                                    <p>$158.23</p>
-                                                    <p class="pourc">-8.4%</p>
-                                                </div>
+                                            <div class="row jour-num">
+                                            <form method="post" action="">
+                                            <input class="day" type="submit" value="25" name="btn">
+                                            <input class="day" type="submit" value="26" name="btn">
+                                            <input class="day" type="submit" value="27" name="btn">
+                                            <input class="day" type="submit" value="28" name="btn">
+                                            <input class="day" type="submit" value="29" name="btn">
+                                            <input class="day" type="submit" value="30" name="btn">
+                                            <input class="day" type="submit" value="31" name="btn">
+                                            </form>
+                                            <form method="post" action="index.php">
+                                            <input class="day" type="submit" value="" name="btn">
+                                            </form>
                                             </div>
+                                            
+                                            <?php $_SESSION['jours']=1; ?>
+                                            
+                                            
                                         </div>
                                     </div>
                                 </div>
+
                                 <div class="col-md-6">
                                     <!--Maquette carte representation client-->
                                     <h5>Sales Mapping by Country</h5>
                                     <div id="container"></div>
+                                
                 <!--Carte en attendant de la mettre dans un fichier different-->
     <script>
     anychart.onDocumentReady(function() {
@@ -343,11 +372,53 @@
                             </div>
                             <br>
                             <br><br>
+                            <!--TotalCustomer TotalRevenue TotalPRofit-->
+                                        <div class="row total gy-3">
+                                            <div class="col-3 total-customer pt-3 pb-3">
+                                                <p style="font-size: 100%;">Total Customer</p>
+                                                <div class="total-cust">
+                                                    <p>$45.52</p>
+                                                    <p class="pourc">-2.3%</p>
+                                                </div>
+                                            </div>
+                                            <div class="col-3 total-revenue pt-3 pb-3">
+                                                <p style="font-size: 100%;">Total Revenue</p>
+                                                <div class="total-rev">
+                                                <?php
+                                                    $data = $mysqli->query('SELECT SUM(prix_vente) as sum FROM produit WHERE id in (SELECT id_produit from produit_client where id_client in (SELECT id_client FROM client_vendeur WHERE id_vendeur=9))') or die(mysql_error());
+                                                    $row = $data->fetch_assoc();
+                                                    $numClient = $row['sum'];
+                                                    echo '$'.sprintf("%.2f", $numClient);
+                                                    
+                                                ?>
+                                                    <p></p>
+                                                    <p class="pourc">+4.2%</p>
+                                                </div>
+                                            </div>
+                                            <div class="col-3 total-profit pl-3 pt-3 pb-3">
+                                                <p style="font-size: 100%;">Total Profit</p>
+                                                <div class="total-prof">
+                                                <?php
+                                                    $data = $mysqli->query("SELECT SUM(prix_achat) as sum FROM produit WHERE id in (SELECT id_produit from produit_client where id_client in (SELECT id_client FROM client_vendeur WHERE id_vendeur in (SELECT id from vendeur WHERE username='".$_SESSION['username']."')))") or die(mysql_error());
+                                                    $row = $data->fetch_assoc();
+                                                    $numClient = $row['sum'];
+                                                    $data1 = $mysqli->query("SELECT SUM(prix_vente) as sum FROM produit WHERE id in (SELECT id_produit from produit_client where id_client in (SELECT id_client FROM client_vendeur WHERE id_vendeur in (SELECT id from vendeur WHERE username='".$_SESSION['username']."')))") or die(mysql_error());
+                                                    $row1 = $data1->fetch_assoc();
+                                                    $numClient1 = $row1['sum'];
+                                                    $numClient1=$numClient1-$numClient;
+                                                    echo '$'.sprintf("%.2f", $numClient1);
+                                                    
+                                                ?>
+                                                    <p></p>
+                                                    <p class="pourc">-8.4%</p>
+                                                </div>
+                                            </div>
+                                        </div>
                             <!--CustomerSatisfaction 3Memojis-->
                             <div class="container">
                                 <div class="row">
                                     <!--Chart customer satisfaction-->
-                                    <div class="col-md-6" style="margin-top:-15px;">
+                                    <div class="col-md-6">
                                         <h3>Customer satisfaction</h3>
                                         <br><br>
                                         <div class="chart-container">
@@ -380,5 +451,8 @@
                 </div>
             </div>
         </div>
+        <script>
+   
+</script>
     </body>
 </html>

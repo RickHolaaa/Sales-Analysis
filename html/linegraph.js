@@ -18,16 +18,12 @@ $(document).ready(function(){
         datasets: [
           {
             label: "Reviews",
-            fill: false,
-<<<<<<< HEAD
-            lineTension: 0.6,
-=======
+            fill: true,
             lineTension: 0.4,
->>>>>>> 50fabd190e158e4a27a185082cd1cefcbdf33047
-            backgroundColor: "#60C8FB",
-            borderColor: "rgb(83, 181, 226)",
-            pointHoverBackgroundColor: "rgb(96, 200, 251)",
-            pointHoverBorderColor: "rgb(96, 200, 251)",
+            backgroundColor: "#9CE0E5",
+            borderColor: "#00ACC3",
+            pointHoverBackgroundColor: "#00ACC3",
+            pointHoverBorderColor: "#00ACC3",
             data: avis
           },
         ],

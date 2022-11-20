@@ -59,8 +59,14 @@
                             $nbr = rand($numClient+1,$numClient+100);
                             $sql="INSERT INTO CLIENT_VENDEUR (ID_CLIENT,ID_VENDEUR) VALUES('$nbr',(SELECT id FROM vendeur WHERE username='".$_POST['username']."'))";
                             $result = mysqli_query($mysqli,$sql);
+                            $prod=rand(1,300);
                             if (!$result) {
                              die('Invalid query: ' . mysqli_error());
+                                }
+                            $sql="INSERT INTO produit_client (ID_CLIENT,ID_PRODUIT) VALUES('$nbr','$prod')";
+                            $result = mysqli_query($mysqli,$sql);
+                            if (!$result) {
+                                die('Invalid query: ' . mysqli_error());
                                 }
                         }
                         $data = mysqli_query($mysqli,"SELECT id as id_user FROM vendeur WHERE username='".$_POST['username']."'") or die(mysql_error());
