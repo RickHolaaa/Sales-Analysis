@@ -123,7 +123,6 @@
                                     </a>
                                     <a href="./settings.php">
                                     <?php 
-                                        require("config.php");
                                       $sql =  "SELECT IMAGE FROM image WHERE USERNAME_ID=".$_SESSION['id'];
                                       $result = $mysqli->query($sql);
                                       // Transformer en liste 
