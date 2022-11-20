@@ -1,7 +1,7 @@
 <?php
 //include auth_session.php file on all user panel pages
 include("auth_session.php");
-
+require("config.php");
 ?>
 <!DOCTYPE html>
 <html lang="fr" style="background-color: #181921;">
@@ -43,21 +43,9 @@ include("auth_session.php");
                                 </a>
                             </li>
                             <li class="nav-item">
-                                <a href="#" class="nav-link section">
-                                    <i class='fa fa-calendar mr-3 fa-fw'></i>
-                                    Calendar
-                                </a>
-                            </li>
-                            <li class="nav-item">
-                              <a href="./statistics.php" class="nav-link section">
+                              <a href="./commentaire.php" class="nav-link section">
                                 <i class='fas fa-chart-bar mr-3 fa-fw'></i>
-                                        Statistic
-                                    </a>
-                            </li>
-                            <li class="nav-item">
-                              <a href="#" class="nav-link section">
-                                <i class='fa fa-envelope mr-3 fa-fw'></i>
-                                        Messages
+                                        Reviews
                                     </a>
                             </li>
                             <li class="nav-item">
@@ -75,24 +63,26 @@ include("auth_session.php");
                         <!--Dashboard Search Profile-->
                         <div class="row">
                             <!--Dashboard-->
-                            <div class="col-md-4 pt-5 pb-5"> 
-                                <h2>Statistics</h2>
+                            <div class="col-md-8 pt-5 pb-5"> 
+                                <h2 style="font-weight:bold; padding-left:40px;">Reviews</h2>
                             </div>
-                            <div class="col-md- pt-5 pb-5">
-                            <!--SearchBar-->
-                                <div class="input-group">
-                                    <input class="form-control rounded-pill py-2 pr-5 mr-1 border-0" type="search" value="search" id="example-search-input1">
-                                    <span class="input-group-append">
-                                        <div class="input-group-text border-0 bg-transparent ml-n5"><i class="fa fa-search"></i></div>
-                                    </span>
-                                </div>
-                            </div>
-                            <div class="col-md-4 pt-5 profile pr-5 pb-5">
+                            <div class="col-md-4 pt-5 profile pr-2 pb-5">
                             <!--Profile-->
                                 <div class="icons">
-                                    <img class="" src="../img/notif.png" style="width: 15%;">
-                                    <a href="./signup.php">
-                                        <img src="../img/memoji-iphone-ios-13-modified.png" style="width: 10%;"">
+                                    <a href="./commentaire.php">
+                                    <img class="" src="../img/ring.png" style="width: 50px;">
+                                    </a>
+                                    <a href="./settings.php">
+                                    <?php 
+                                      $sql =  "SELECT IMAGE FROM image WHERE USERNAME_ID=".$_SESSION['id'];
+                                      $result = $mysqli->query($sql);
+                                      // Transformer en liste 
+                                      $row = $result->fetch_assoc();
+                                    ?>
+                                    <img src="data:image/png;charset=utf8;base64,<?php echo base64_encode($row['IMAGE']); ?>" width="43px">
+                                    </a>
+                                    <a href="logout.php">
+                                        <img class="" src="../img/lgout.png" style="width: 50px;">
                                     </a>
                                 </div>
                             </div>
@@ -101,8 +91,6 @@ include("auth_session.php");
                         <!--Map representation-->
                         <?php
                             // Fonction : affichage des clients
-                            require('config.php');
-
                             function show_database(){
                                 global $mysqli;
                                 $sql = 'SELECT * from client';
@@ -111,11 +99,14 @@ include("auth_session.php");
                                 $somme = 0;
                                 $cpt = 0;
                                 foreach($query as $client){
-                                    print("<p><b>Nom :</b> ".$client['NOM'].", <b>Prénom :</b> ".$client['PRENOM'].", <b>Pays :</b> ".$client["PAYS"].", <b>Avis :</b> ".$client['AVIS']."</p>");
+                                    $sql2 = "SELECT * from commentaire WHERE ID_CLIENT='".$client['ID']."'";
+                                    $query2 = $mysqli->query($sql2);
+                                    $row2 = $query2->fetch_assoc();
+                                    print("<div class='comm'><p><b>First Name :</b> ".$client['NOM'].", <b>Last Name :</b> ".$client['PRENOM'].", <b>Country :</b> ".$client["PAYS"].", <b>Stars :</b> ".$client['AVIS']."</p>
+                                    <p><b>Review :</b> ".$row2['TEXT']."</p></div><br>");
                                     $somme+=$client["AVIS"];
                                     $cpt++;
                                 }
-                                printf("Moyenne des avis : ".$somme/$cpt."<br>");
                             }
                             // Appel de la fonction affichage
                             //show_database();
@@ -136,6 +127,7 @@ include("auth_session.php");
                                     }
                                     fclose($open);
                                 }
+
                                 // Récupérer les pays de la database
                                 $sql = 'SELECT * from pays';
                                 $query = $mysqli->query($sql);
@@ -143,24 +135,7 @@ include("auth_session.php");
                                 $sizeofcountry = sizeof($pays);
                                 // Récupérer la taille de la liste
                                 $sizeofarray = sizeof($identite);
-                                // Si $size ne dépasse pas la taille maximale
-                                /*
-                                if($size<=sizeof($identite)){
-                                    // Afficher $size identités
-                                    for($i=0;$i<$size;$i++){
-                                        $i1 = rand(0,sizeof($identite)-1);
-                                        echo "i1: ".$i1."<br>";
-                                        $i2 = rand(0,sizeof($identite)-1);
-                                        echo "i2: ".$i2."<br>";
-                                        echo "<pre style='color: white;'>";
-                                        echo $identite[$i1][1]." ".$identite[$i2][2]." ".sizeof($identite);
-                                        echo"</pre>";
-                                    }
-                                }
-                                else{
-                                    echo sizeof($identite);
-                                }
-                                */
+
                                 // Création de commande
                                 if($size<=sizeof($identite)){
                                     // Afficher $size identités
@@ -182,21 +157,74 @@ include("auth_session.php");
                             // Fonction : Réinitialiser tableau CLIENT
                             function reset_client(){
                                 global $mysqli;
-
+                                
                                 $sql = "DELETE FROM client WHERE ID>=1";
                                 $query = $mysqli->query($sql);
                                 $sql = "ALTER TABLE client AUTO_INCREMENT=1";
                                 $query = $mysqli->query($sql);
+                            
+                                $sql = "DELETE FROM commentaire WHERE ID>=1";
+                                $query = $mysqli->query($sql);
+                                $sql = "ALTER TABLE commentaire AUTO_INCREMENT=1";
+                                $query = $mysqli->query($sql);
+                            }
+
+                            // Fonction récupérer des avis
+                            function create_review(){
+                                global $mysqli;
+                                
+                                $sql = 'SELECT * from client';
+                                $query = $mysqli->query($sql);
+                                $row = $query->fetch_assoc();
+                                // Récupérer les noms et prénoms
+                                $cpt = 0;
+                                $size = sizeof($row);
+                                // 1 -> product name
+                                // 4 -> review
+                                // 5 -> stars
+                                if(($open = fopen("../data/shoes.csv","r")) !== FALSE){
+                                    while((($data = fgetcsv($open,50,",")) !== FALSE) && ($cpt<$size)){
+                                        $avis[] = $data;
+
+                                    }
+                                    fclose($open);
+                                }
+                                // Récupérer la taille de la liste
+                                $sizeofarray = sizeof($avis);
+
+                                // Création de commande
+                                if($size<=sizeof($avis)){
+                                    // Afficher $size identités
+                                    for($i=0;$i<$size;$i++){
+                                        $i1 = rand(0,sizeof($avis)-1); // LIGNE
+                                        //echo $array[$i1][1]." ".$array[$i2][2]." ".sizeof($array);
+                                        //$sql = "INSERT INTO commentaire SET NOM='".$identite[$i2][2]."', PRENOM='".$identite[$i1][1]."', PAYS='".$pays[$indicePays]['nom_en_gb']."', AVIS=".$avis;
+                                        //$query = $mysqli->query($sql);
+                                    }
+                                }
+                                
+                                $sql = 'SELECT * from client';
+                                $query = $mysqli->query($sql);
+                                $row = $query->fetch_all(MYSQLI_ASSOC);
+                                foreach($query as $client){
+                                    if(mysqli_num_rows(mysqli_query($mysqli,"SELECT * FROM commentaire WHERE ID_CLIENT=".$client['ID']))==0){
+                                        $com = rand(1,$sizeofarray-1);
+                                        while(((strpos(implode("",$avis[$com]),"'")) !== false )||(count($avis[$com])!==11)){
+                                            $com = rand(1,$sizeofarray-1);
+                                        }
+                                        $sql = "INSERT INTO commentaire SET TEXT='".$avis[$com][4]."', ID_CLIENT=".$client['ID'];
+                                        $query = $mysqli->query($sql);   
+                                    }
+                                    
+                                }
                             }
                             //reset_client();
 
                             //reset_client();
                             //create_client(100);
+                            create_review();
+                            show_database();
                         ?>
-                    <?php 
-                        show_database();
-                        print($_SESSION['username']);
-                    ?>
                 </div>
             </div>
         </div>

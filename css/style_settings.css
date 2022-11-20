@@ -22,6 +22,7 @@ html, body, .container-fluid, .row{
 
 .logo{
     text-align: center;
+    margin-bottom: 150px;
 }
 
 .logo img{

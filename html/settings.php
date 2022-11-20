@@ -47,9 +47,11 @@ include("auth_session.php");
               require('config.php');
             // Si on clique sur le bouton DELETE pour supprimer son compte
                 if (isset($_POST['deleted'])){
+                  $change_config = $mysqli->query("SET FOREIGN_KEY_CHECKS=0");
                   $user_id = $_SESSION['id']; // On récupère l'ID de l'utilisateur
                   $query = "DELETE FROM vendeur WHERE id='" . $user_id . "'"; // Supprimer de la table "vendeur", l'utilisateur avec l'id actuel
                   $launch_query = $mysqli->query($query); // On exécute la commande
+                  $change_config = $mysqli->query("SET FOREIGN_KEY_CHECKS=1");
                   if($launch_query){ // Si la commande s'est bien exécutée
                     $_SESSION['message']="Compte supprimé avec succès."; // Afficher un mot de succès
                     header("Location: login.php"); // Renvoyer faire la page login
@@ -238,21 +240,9 @@ include("auth_session.php");
                                 </a>
                             </li>
                             <li class="nav-item">
-                                <a href="#" class="nav-link section">
-                                    <i class='fa fa-calendar mr-3 fa-fw'></i>
-                                    Calendar
-                                </a>
-                            </li>
-                            <li class="nav-item">
-                              <a href="./statistics.php" class="nav-link section">
-                                <i class='fas fa-chart-bar mr-3 fa-fw'></i>
-                                        Statistic
-                                    </a>
-                            </li>
-                            <li class="nav-item">
-                              <a href="#" class="nav-link section">
+                              <a href="./commentaire.php" class="nav-link section">
                                 <i class='fa fa-envelope mr-3 fa-fw'></i>
-                                        Notifications
+                                        Reviews
                                     </a>
                             </li>
                             <li class="nav-item">
@@ -270,25 +260,16 @@ include("auth_session.php");
                         <!--Dashboard Search Profile-->
                         <div class="row">
                             <!--Dashboard-->
-                            <div class="col-md-4 pt-5 pl-5">
-                                <h2>Settings</h2>
-                            </div>
-                            <div class="col-md-4 pt-5 pb-5">
-                            <!--SearchBar-->
-                                <div class="input-group">
-                                    <input class="form-control rounded-pill py-2 pr-5 mr-1 border-0" type="search" value="search" id="example-search-input1">
-                                    <span class="input-group-append">
-                                        <div class="input-group-text border-0 bg-transparent ml-n5"><i class="fa fa-search"></i></div>
-                                    </span>
-                                </div>
+                            <div class="col-md-8 pt-5 pl-5">
+                            <h2 style="font-weight:bold;">Settings</h2>
                             </div>
                             <div class="col-md-4 pt-5 profile pr-5 pb-5">
                             <!--Profile-->
                                 <div class="icons">
-                                    <a href="./messages.html">
+                                    <a href="./commentaire.php">
                                     <img class="" src="../img/ring.png" style="width: 50px;">
                                     </a>
-                                    <a href="./signup.html">
+                                    <a href="./settings.php">
                                     <?php 
                                       $sql =  "SELECT IMAGE FROM image WHERE USERNAME_ID=".$_SESSION['id'];
                                       $result = $mysqli->query($sql);

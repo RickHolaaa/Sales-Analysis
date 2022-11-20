@@ -27,6 +27,7 @@ html, body, .row, .container-fluid{
 
 .logo{
     text-align: center;
+    margin-bottom: 150px;
 }
 
 .logo img{
@@ -96,4 +97,12 @@ html, body, .row, .container-fluid{
 .graph{
     width: 650px;
     height: 300px;
+}
+
+.comm{
+    background-color: #242732;
+    padding: 15px;
+    margin-bottom: 15px;
+    margin-left: 100px;
+    margin-right: 100px;
 }
