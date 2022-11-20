@@ -54,8 +54,12 @@
                 }
             }
             */
-            for($jours = 1; $jours<=26; $jours++) {
-                $sql="INSERT INTO jours () VALUES()";
+            
+            for($jours = 1; $jours<=400; $jours++) {
+                $val1=rand(2000,4000)/10;
+                $val2=rand(5000,6000)/10;
+
+                $sql="INSERT INTO produit (prix_achat,prix_vente) VALUES($val1,$val2)";
                 $result = mysqli_query($mysqli,$sql);
                 if (!$result) {
                 die('Invalid query: ' . mysqli_error());
