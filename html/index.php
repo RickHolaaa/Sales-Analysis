@@ -13,7 +13,7 @@
         <!-- CSS -->
         <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" />
         <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.2.0/css/all.css" />
-        <link rel="stylesheet" href="../css/" />
+        <link rel="stylesheet" href="../css/styl" />
         <style>
             <?php 
                     include("../css/style.css"); 
@@ -88,9 +88,21 @@
                                 </a>
                             </li>
                             <li class="nav-item">
-                              <a href="./commentaire.php" class="nav-link section">
+                                <a href="#" class="nav-link section">
+                                    <i class='fa fa-calendar mr-3 fa-fw'></i>
+                                    Calendar
+                                </a>
+                            </li>
+                            <li class="nav-item">
+                              <a href="./statistics.php" class="nav-link section">
+                                <i class='fas fa-chart-bar mr-3 fa-fw'></i>
+                                        Statistic
+                                    </a>
+                            </li>
+                            <li class="nav-item">
+                              <a href="#" class="nav-link section">
                                 <i class='fa fa-envelope mr-3 fa-fw'></i>
-                                        Reviews
+                                        Notifications
                                     </a>
                             </li>
                             <li class="nav-item">
@@ -108,27 +120,31 @@
                         <!--Dashboard Search Profile-->
                         <div class="row" style="margin-bottom:-50px;">
                             <!--Dashboard-->
-                            <div class="col-md-8 pt-5 pb-5"> 
+                            <div class="col-md-4 pt-5 pb-5"> 
                                 <h2 style="font-weight:bold;">Dashboard</h2>
                                 <br><br>
                                 <p>Hey, <?php echo $_SESSION['username']; ?>!</p>
                                 <p>You are now user dashboard page.</p>
                             </div>
 
+                            <div class="col-md-4 pt-5 pb-5">
+                            <!--SearchBar-->
+                                <div class="input-group">
+                                    <input class="form-control rounded-pill py-2 pr-5 mr-1 border-0" type="search" value="search" id="example-search-input1">
+                                    <span class="input-group-append">
+                                        <div class="input-group-text border-0 bg-transparent ml-n5"><i class="fa fa-search"></i></div>
+                                    </span>
+                                </div>
+                            </div>
+
                             <div class="col-md-4 pt-5 profile pr-5 pb-5">
                             <!--Profile-->
                                 <div class="icons">
-                                    <a href="./commentaire.php">
-                                    <img class="" src="../img/ring.png" style="width: 50px;">
+                                    <a href="./messages.html">
+                                    <img class="" src="../img/ring.png" style="width:50px;">
                                     </a>
-                                    <a href="./settings.php">
-                                    <?php 
-                                      $sql =  "SELECT IMAGE FROM image WHERE USERNAME_ID=".$_SESSION['id'];
-                                      $result = $mysqli->query($sql);
-                                      // Transformer en liste 
-                                      $row = $result->fetch_assoc();
-                                    ?>
-                                    <img src="data:image/png;charset=utf8;base64,<?php echo base64_encode($row['IMAGE']); ?>" width="43px">
+                                    <a href="./signup.html">
+                                        <img src="../img/memoji-iphone-ios-13-modified.png" style="width: 43px;"">
                                     </a>
                                     <a href="logout.php">
                                         <img class="" src="../img/lgout.png" style="width: 50px;">
@@ -282,7 +298,7 @@
       createSeries(
         '100,000 - 1,000,000',
         portsDataSet.filter('outflows', filterFunction(100000, 1000000)),
-        '#9CE0E5'
+        '#5e3953'
       );
       createSeries(
         '1,000,000 - 5,000,000',
@@ -410,9 +426,8 @@
                                         </div>
                                     </div>
                                     <!--3Memsojis-->
-                                    <div class="col-md-6" style="margin-top:-15px;">
-                                    <h3>Top Customers</h3>
-                                    <br><br><br>
+                                    <div class="col-md-6" style="margin-top:50px;">
+                                    <br>
                                         <div class="row memojis">
                                             <div class="col-md-3 memoji">
                                                 <img src="../img/memoji1.png">
