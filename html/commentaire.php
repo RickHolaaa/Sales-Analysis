@@ -99,7 +99,7 @@ require("config.php");
                                 $somme = 0;
                                 $cpt = 0;
                                 foreach($query as $client){
-                                    $sql2 = "SELECT * from commentaire WHERE ID_CLIENT IN (SELECT ID_CLIENT FROM client_vendeur WHERE ID_VENDEUR=".$_SESSION['id'].")";
+                                    $sql2 = "SELECT * from commentaire WHERE ID_CLIENT=".$client['ID'];
                                     $query2 = $mysqli->query($sql2);
                                     $row2 = $query2->fetch_assoc();
                                     print("<div class='comm'><p><b>First Name :</b> ".$client['NOM'].", <b>Last Name :</b> ".$client['PRENOM'].", <b>Country :</b> ".$client["PAYS"].", <b>Stars :</b> ".$client['AVIS']."</p>
@@ -157,7 +157,7 @@ require("config.php");
                             // Fonction : Réinitialiser tableau CLIENT
                             function reset_client(){
                                 global $mysqli;
-                                
+
                                 $sql = "DELETE FROM client WHERE ID>=1";
                                 $query = $mysqli->query($sql);
                                 $sql = "ALTER TABLE client AUTO_INCREMENT=1";
