@@ -73,16 +73,16 @@ include("auth_session.php");
 		              $row = $query->fetch_assoc();
                   $phppass = $row['password'];
                   if($row['password']!=$old_pass){
-                    echo "<p style='text-align:center;'>Ce n'est pas votre ancien mot de passe</p>";
+                    echo "<p style='text-align:center;'>This is not your old password !</p>";
                   }
                   else if($new_pass!=$confirm_new_pass){ // Si le nouveau mot de passe du formulaire n'est pas répété 2 fois (confirmation)
-                    echo "<p style='text-align:center;'>Veuillez confirmer votre nouveau mot de passe</p>"; // Afficher un message d'erreur
+                    echo "<p style='text-align:center;'>Your two passwords are different !</p>"; // Afficher un message d'erreur
                   }
                   else{
                     $sql = "UPDATE vendeur SET password = '".$new_pass."' WHERE id ='".$_SESSION['id']."'"; // Modifier le mot de passe (base de données) par le nouveau mot de passe du formulaire
                     $query = $mysqli->query($sql); // Exécuter la commande
                     $_SESSION['password'] = $new_pass;
-                    echo "<p style='text-align:center;'>Mot de passe modifié avec succès</p>";
+                    echo "<p style='text-align:center;'>Password edit with success !</p>";
                   }
                 }
 

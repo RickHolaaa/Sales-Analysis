@@ -369,7 +369,7 @@
                                                 <p style="font-size: 100%;">Total Revenue</p>
                                                 <div class="total-rev">
                                                 <?php
-                                                    $data = $mysqli->query('SELECT SUM(prix_vente) as sum FROM produit WHERE id in (SELECT id_produit from produit_client where id_client in (SELECT id_client FROM client_vendeur WHERE id_vendeur=9))') or die(mysql_error());
+                                                    $data = $mysqli->query("SELECT SUM(prix_vente) as sum FROM produit WHERE id in (SELECT id_produit from produit_client where id_client in (SELECT id_client FROM client_vendeur WHERE id_vendeur in (SELECT id from vendeur WHERE username='".$_SESSION['username']."')))") or die(mysql_error());
                                                     $row = $data->fetch_assoc();
                                                     $numClient = $row['sum'];
                                                     echo '$'.sprintf("%.2f", $numClient);
