@@ -201,9 +201,14 @@ html, body, .container-fluid, .row{
     width: 100%;
     display: flex;
     justify-content: space-between;
-    margin-left: 20px;
-    margin-right: 40px;
+    margin-left: 17.5px;
+    padding-right: 30px;
     vertical-align: middle;
+    margin-bottom: 5px;
+}
+
+.calendar{
+    padding-bottom: 10px;
 }
 
 .jour-num .day{
@@ -219,8 +224,8 @@ html, body, .container-fluid, .row{
     
 }
 
-.day{
-    margin-right: 8.6px;
+.day, .actual-day{
+    margin-right: 13.5px;
 }
 
 .actual-day{
@@ -233,7 +238,6 @@ html, body, .container-fluid, .row{
     padding-top: 7px;
     color: #181921;
     border:0;
-    margin-right: 8.6px;
 }
 
 #map{
@@ -270,3 +274,4 @@ html, body, .container-fluid, .row{
     text-align: center;
     margin-bottom: 0px;
 }
+
