@@ -157,7 +157,7 @@ require("config.php");
                             // Fonction : Réinitialiser tableau CLIENT
                             function reset_client(){
                                 global $mysqli;
-                                
+
                                 $sql = "DELETE FROM client WHERE ID>=1";
                                 $query = $mysqli->query($sql);
                                 $sql = "ALTER TABLE client AUTO_INCREMENT=1";
