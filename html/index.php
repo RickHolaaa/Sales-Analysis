@@ -298,7 +298,7 @@
       createSeries(
         '100,000 - 1,000,000',
         portsDataSet.filter('outflows', filterFunction(100000, 1000000)),
-        '#5e3953'
+        '#9CE0E5'
       );
       createSeries(
         '1,000,000 - 5,000,000',
