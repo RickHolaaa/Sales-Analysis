@@ -1,6 +1,6 @@
 $(document).ready(function(){
   $.ajax({
-    url : "http://localhost:8888/sales-analysis/html/avisdata.php",
+    url : "http://localhost/sales-analysis/html/avisdata.php",
     type : "GET",
     success : function(data){
       console.log(data);
