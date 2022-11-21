@@ -123,8 +123,8 @@
                             <div class="col-md-4 pt-5 pb-5"> 
                                 <h2 style="font-weight:bold;">Dashboard</h2>
                                 <br><br>
-                                <p>Hey, <?php echo $_SESSION['username']; ?>!</p>
-                                <p>You are now user dashboard page.</p>
+                                <p>Hi <?php echo $_SESSION['username']; ?>, welcome back !</p>
+                                <p>You are now on user dashboard page.</p>
                             </div>
 
                             <div class="col-md-4 pt-5 pb-5">
